@@ -52,7 +52,7 @@ NSString *LAST_UPDATE_URL = @"http://keynote.se/iphone/events-update-time.txt";
 	}
 }
 
-- (void) checkForNewerEvents {	
+- (void) checkForNewerEvents {
 	[delegate setLoadingText:@"Checking for newer events..."];
 	status = EventManagerStatusChecking;
 	[self makeConnection:LAST_UPDATE_URL];
@@ -94,8 +94,8 @@ NSString *LAST_UPDATE_URL = @"http://keynote.se/iphone/events-update-time.txt";
 			return;
 		}
 		else {
-			UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"The events could not be processed" 
-												message:@"The events fetched from the server could not be processed.\nOld events will be used instead." delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil] autorelease];
+			UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"The events could not be processed"
+															 message:@"The events fetched from the server could not be processed.\nOld events will be used instead." delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil] autorelease];
 			[alert show];
 		}
 	}
@@ -104,7 +104,7 @@ NSString *LAST_UPDATE_URL = @"http://keynote.se/iphone/events-update-time.txt";
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
 	status = EventManagerStatusIdle;
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-	UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"The events could not be loaded" 
+	UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"The events could not be loaded"
 													 message:@"The events could not be loaded from the server.\nPlease check your internet connection.\nOld events will be used instead." delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil] autorelease];
 	[alert show];
 }
@@ -123,7 +123,7 @@ NSString *LAST_UPDATE_URL = @"http://keynote.se/iphone/events-update-time.txt";
 	if(lastFetch+[settingsDelegate updateInterval] > [EventManager dateInFormat:@"%s"].intValue)
 		return;
 	
-	[self checkForNewerEvents];	
+	[self checkForNewerEvents];
 }
 
 - (id) init {
@@ -134,7 +134,7 @@ NSString *LAST_UPDATE_URL = @"http://keynote.se/iphone/events-update-time.txt";
 	return self;
 }
 
-- (void) loadEvents {	
+- (void) loadEvents {
 	NSString *path = [NSString stringWithFormat:@"%@/Library/Caches/events.plist", NSHomeDirectory()];
 	NSFileManager *manager = [NSFileManager defaultManager];
 	
@@ -167,8 +167,8 @@ NSString *LAST_UPDATE_URL = @"http://keynote.se/iphone/events-update-time.txt";
 	if([delegate respondsToSelector:@selector(updateFinished)])
 		[delegate performSelector:@selector(updateFinished)];
 	[reciever eventsLoaded:self.events];
-}	
-	
+}
+
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
 	if(alertView.tag == 1337){
 		NSString *path = [NSString stringWithFormat:@"%@/Library/Caches/events.plist", NSHomeDirectory()];
@@ -181,7 +181,7 @@ NSString *LAST_UPDATE_URL = @"http://keynote.se/iphone/events-update-time.txt";
 	else
 		[self updateComplete];
 }
-		
+
 +(NSString *) dateInFormat:(NSString*) stringFormat {
 	char buffer[80];
 	const char *format = [stringFormat UTF8String];
@@ -200,8 +200,8 @@ NSString *LAST_UPDATE_URL = @"http://keynote.se/iphone/events-update-time.txt";
 	[delegate setLoadingText:@"Loading events from file..."];
 	
 	NSString *path = [NSString stringWithFormat:@"%@/Library/Caches/events.plist", NSHomeDirectory()];
-			
-	NSDictionary *rootDict = [NSDictionary dictionaryWithContentsOfFile:path];	
+	
+	NSDictionary *rootDict = [NSDictionary dictionaryWithContentsOfFile:path];
 	
 	if(rootDict == nil) {
 		path = [[NSBundle mainBundle] pathForResource:@"events" ofType:@"plist"];
@@ -216,17 +216,16 @@ NSString *LAST_UPDATE_URL = @"http://keynote.se/iphone/events-update-time.txt";
 - (NSArray *) processEventsData: (NSData *)data {
 	NSString *errorDesc = nil;
 	NSPropertyListFormat format;
-	NSDictionary * dict = (NSDictionary*)[NSPropertyListSerialization
-										  propertyListFromData:data
-										  mutabilityOption:NSPropertyListMutableContainersAndLeaves
-										  format:&format
-										  errorDescription:&errorDesc];
+	NSDictionary * dict = (NSDictionary*)[NSPropertyListSerialization propertyListFromData:data
+																		  mutabilityOption:NSPropertyListMutableContainersAndLeaves
+																					format:&format
+																		  errorDescription:&errorDesc];
 	if(!dict){
         NSLog(errorDesc);
         [errorDesc release];
 		return nil;
 	}
-		
+	
 	return [dict objectForKey:@"events"];
 }
 

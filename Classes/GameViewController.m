@@ -32,10 +32,10 @@
 		
 		[gameBoardView addSubview:gameBoard.view];
 		
-		CFBundleRef mainBundle = CFBundleGetMainBundle ();	
+		CFBundleRef mainBundle = CFBundleGetMainBundle ();
 		CFURLRef soundFileURLRef = CFBundleCopyResourceURL(mainBundle, CFSTR ("bingo"), CFSTR ("wav"), NULL);
 		AudioServicesCreateSystemSoundID(soundFileURLRef, &audioPlayerID);
-			
+		
 		[self loadSettings];
 	}
 	
@@ -53,23 +53,20 @@
 }
 
 - (void) loadSettings {
-	if([[NSUserDefaults standardUserDefaults] integerForKey:@"boardNumber"] != 0)
+	if([[NSUserDefaults standardUserDefaults] floatForKey:@"zoomScale"] != 0) {
 		boardNumber = [[NSNumber alloc] initWithInt:[[NSUserDefaults standardUserDefaults] integerForKey:@"boardNumber"]];
-	
-	if([[NSUserDefaults standardUserDefaults] floatForKey:@"contentOffsetX"] != 0 || [[NSUserDefaults standardUserDefaults] floatForKey:@"contentOffsetY"] != 0) {		
-		CGPoint point = CGPointMake([[NSUserDefaults standardUserDefaults] floatForKey:@"contentOffsetX"], [[NSUserDefaults standardUserDefaults] floatForKey:@"contentOffsetY"]);
-				
-		[gameBoardView setContentOffset:point animated:NO];
 		
-	}
-	
-	if([[NSUserDefaults standardUserDefaults] floatForKey:@"zoomScale"] != 0)
+		CGPoint point = CGPointMake([[NSUserDefaults standardUserDefaults] floatForKey:@"contentOffsetX"], [[NSUserDefaults standardUserDefaults] floatForKey:@"contentOffsetY"]);
+			
+		[gameBoardView setContentOffset:point animated:NO];
+			
 		gameBoardView.zoomScale = [[NSUserDefaults standardUserDefaults] floatForKey:@"zoomScale"];
-	
-	if([gameBoard bingo])
-		[self bingoSilent];
-	else
-		[self removeBingo];
+		
+		if([gameBoard bingo])
+			[self bingoSilent];
+		else
+			[self removeBingo];
+	}
 }
 
 - (void) saveSettings {
@@ -115,7 +112,7 @@
 	[self.gameBoard viewWillAppear:animated];
 }
 
-- (void) loadView {	
+- (void) loadView {
 	self.view = [[UIView alloc] initWithFrame:CGRectMake(0, 19, 320, 461)];
 	self.view.backgroundColor = [UIColor whiteColor];
 	
@@ -140,19 +137,19 @@
 	UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
 	
 	UIBarButtonItem *newGameButton = [[UIBarButtonItem alloc] initWithTitle:@"New Game"
-															  style:UIBarButtonItemStyleBordered 
-															  target:delegate
-   															  action:@selector(pickNewGame)];
+																	  style:UIBarButtonItemStyleBordered
+																	 target:delegate
+																	 action:@selector(pickNewGame)];
 	
-	UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace 
-															  target:nil
-															  action:nil];
+	UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+																				   target:nil
+																				   action:nil];
 	
 	UIBarButtonItem *infoButton = [[UIBarButtonItem alloc] initWithTitle:@"Settings"
-														   style:UIBarButtonItemStyleBordered 
-														   target:delegate
-														   action:@selector(showSettings)];
-		
+																   style:UIBarButtonItemStyleBordered
+																  target:delegate
+																  action:@selector(showSettings)];
+	
 	[toolbar setItems:[NSArray arrayWithObjects:newGameButton, flexibleSpace, infoButton, nil]];
 
 	[self.view addSubview:toolbar];

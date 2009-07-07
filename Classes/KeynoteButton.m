@@ -52,7 +52,7 @@
 
 - (BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
 	if(event.type == UIEventTypeTouches) {
-		[self setHighlighted:YES withDelay:0.2];	
+		[self setHighlighted:YES withDelay:0.2];
 	}
 	
 	return YES;
@@ -196,9 +196,7 @@
 	
 	id object = [images objectAtIndex:index];
 	
-	return [object isKindOfClass:[NSNull class]] ?
-		nil :
-		object;
+	return [object isKindOfClass:[NSNull class]] ? nil : object;
 }
 
 - (UIColor *) titleColorForState:(UIControlState)state {
@@ -223,9 +221,7 @@
 	
 	id object = [images objectAtIndex:index];
 	
-	return [object isKindOfClass:[NSNull class]] ?
-		nil :
-		object;
+	return [object isKindOfClass:[NSNull class]] ? nil : object;
 }
 
 - (UIImage *) buttonImageForState:(UIControlState)state {
@@ -250,13 +246,11 @@
 
 	id object = [images objectAtIndex:index];
 	
-	return [object isKindOfClass:[NSNull class]] ?
-		nil :
-		object;
+	return [object isKindOfClass:[NSNull class]] ? nil : object;
 }
 
 
-- (void)drawRect:(CGRect)rect {	
+- (void)drawRect:(CGRect)rect {
 	NSUInteger index;
 	
 	switch (super.state) {

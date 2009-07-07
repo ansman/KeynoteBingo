@@ -47,7 +47,7 @@ int SETTINGS_VIEW = 2;
 	
 	menuViewController = [[MenuViewController alloc] init];
 	menuViewController.delegate = self;
-		
+	
 	gameViewController = [[GameViewController alloc] init];
 	gameViewController.delegate = self;
 	gameViewController.settingsDelegate = settingsViewController;
@@ -154,8 +154,8 @@ int SETTINGS_VIEW = 2;
 		[self performTransition:gameViewController.view newView:[settingsViewController getView] transitionType:TransitionTypeFlipLeft];
 }
 
-- (void) pickNewGame {	
-	if ([gameViewController.view superview] != nil) 
+- (void) pickNewGame {
+	if ([gameViewController.view superview] != nil)
 		[self performTransition:gameViewController.view newView:menuViewController.view transitionType:TransitionTypeMoveOver];
 }
 

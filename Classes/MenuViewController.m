@@ -41,12 +41,12 @@
 	cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
 														style:UIBarButtonItemStyleBordered
 														target:self
-														action:@selector(returnToGame)];	
+														action:@selector(returnToGame)];
 	
 	navBar.items = [NSArray arrayWithObjects:cancelButton, nil];
 	
 	[self.view addSubview:navBar];
-		
+	
 	UILabel *newGameLabel = [[[UILabel alloc] initWithFrame:CGRectMake(109, 0, 101, 44)] autorelease];
 	newGameLabel.text = @"New Game";
 	newGameLabel.font = [UIFont boldSystemFontOfSize:18];
@@ -58,7 +58,7 @@
 	
 	UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(20, 58, 280, 20)] autorelease];
 	label.text = @"Please enter a positive integer:";
-	label.textAlignment = UITextAlignmentCenter;	
+	label.textAlignment = UITextAlignmentCenter;
 	label.textColor = [UIColor whiteColor];
 	label.font = [UIFont boldSystemFontOfSize:17];
 	label.backgroundColor = [UIColor clearColor];
@@ -108,7 +108,7 @@
 - (void) randomNumber {
 	[self closeKeyboard];
 	int intNumber = 1+arc4random() % 2147483646;
-		
+	
 	[self.delegate newGame:[NSNumber numberWithInt:intNumber]];
 }
 

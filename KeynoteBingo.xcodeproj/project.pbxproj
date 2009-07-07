@@ -85,24 +85,24 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				3584861110024FE6000A3792 /* TransitionManager.h */,
-				3584861210024FE6000A3792 /* TransitionManager.m */,
-				35718D080FFBB37C00666D9B /* SettingsViewController.h */,
-				35718D070FFBB37C00666D9B /* SettingsViewController.m */,
 				3546915F0FFD59D8003423CF /* EventManager.h */,
 				354691600FFD59D8003423CF /* EventManager.m */,
 				3588C58B0FE541F2008B2C66 /* GameBoardViewController.h */,
 				3588C58C0FE541F2008B2C66 /* GameBoardViewController.m */,
 				3588C5880FE541E3008B2C66 /* GameViewController.h */,
 				3588C5890FE541E3008B2C66 /* GameViewController.m */,
-				3588C58F0FE5487D008B2C66 /* MenuViewController.h */,
-				3588C5900FE5487D008B2C66 /* MenuViewController.m */,
 				1D3623240D0F684500981E51 /* KeynoteBingoAppDelegate.h */,
 				1D3623250D0F684500981E51 /* KeynoteBingoAppDelegate.m */,
 				35A5EBE10FF917A300779FC5 /* KeynoteButton.h */,
 				35A5EBE20FF917A300779FC5 /* KeynoteButton.m */,
 				352A6DF90FFBE51300D81DEB /* LoadingViewController.h */,
 				352A6DFA0FFBE51300D81DEB /* LoadingViewController.m */,
+				3588C58F0FE5487D008B2C66 /* MenuViewController.h */,
+				3588C5900FE5487D008B2C66 /* MenuViewController.m */,
+				35718D080FFBB37C00666D9B /* SettingsViewController.h */,
+				35718D070FFBB37C00666D9B /* SettingsViewController.m */,
+				3584861110024FE6000A3792 /* TransitionManager.h */,
+				3584861210024FE6000A3792 /* TransitionManager.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";

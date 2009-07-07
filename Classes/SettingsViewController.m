@@ -95,7 +95,7 @@
 		toolbar.barStyle = UIBarStyleDefault;
 		
 		UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back"
-																	   style:UIBarButtonItemStyleBordered 
+																	   style:UIBarButtonItemStyleBordered
 																	  target:delegate
 																	  action:@selector(returnToGame)];
 		
@@ -141,12 +141,8 @@
 		UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
 		toolbar.barStyle = UIBarStyleDefault;
 		
-		/*UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace 
-																					   target:nil
-																					   action:nil];*/
-		
 		UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back"
-																	   style:UIBarButtonItemStyleBordered 
+																	   style:UIBarButtonItemStyleBordered
 																	  target:self
 																	  action:@selector(goBackInMenu)];
 		
@@ -156,7 +152,6 @@
 		
 		[toolbar release];
 		[backButton release];
-		//[flexibleSpace release];
 		
 		updatePicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 245, 320, 80)];
 		updatePicker.showsSelectionIndicator = YES;

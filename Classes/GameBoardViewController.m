@@ -48,10 +48,10 @@
 	return self;
 }
 
-- (void) loadSettings {		
+- (void) loadSettings {
 	for(KeynoteButton *button in buttons)
 		button.selected = [[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"button%iSelected", button.tag]];
-		
+	
 	if([self checkBingo])
 		bingo = YES;
 	else
@@ -88,19 +88,19 @@
 	[delegate loadingComplete];
 }
 
-- (BOOL) checkBingo {	
+- (BOOL) checkBingo {
 	BOOL bingoFoundVert;
 	BOOL bingoFoundHoriz;
 	BOOL bingoFoundDiag1 = YES;
 	BOOL bingoFoundDiag2 = YES;
-		
+	
 	for (NSUInteger i = 0; i < 5; i++) {
 		bingoFoundVert = YES;
 		bingoFoundHoriz = YES;
-		for (NSUInteger j = 0; j < 5 && (bingoFoundVert || bingoFoundHoriz); j++) {		
-			if (((KeynoteButton *)[buttons objectAtIndex:i*5+j]).selected == NO) 
+		for (NSUInteger j = 0; j < 5 && (bingoFoundVert || bingoFoundHoriz); j++) {
+			if (((KeynoteButton *)[buttons objectAtIndex:i*5+j]).selected == NO)
 				bingoFoundVert = NO;
-			if (((KeynoteButton *)[buttons objectAtIndex:j*5+i]).selected == NO) 
+			if (((KeynoteButton *)[buttons objectAtIndex:j*5+i]).selected == NO)
 				bingoFoundHoriz = NO;
 		}
 		
@@ -131,7 +131,7 @@
 	self.view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 550, 550)];
 	
 	for(int i = 0; i < 5; i = i++)
-		for(int j = 0; j < 5; j++)			
+		for(int j = 0; j < 5; j++)
 			[self.view addSubview:[buttons objectAtIndex:i*5+j]];
 }
 
@@ -147,7 +147,7 @@
 	
 	srand([container getBoardNumber].unsignedIntValue);
 	
-	for (KeynoteButton *button in buttons) {		
+	for (KeynoteButton *button in buttons) {
 		do {
 			number = rand() % numberOfEvents;
 		} while (pickedNumbers[number]);

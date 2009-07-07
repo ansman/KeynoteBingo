@@ -34,7 +34,7 @@
 	EventManager *eventManager;
 	
 	@private
-	NSArray *buttons;	
+	NSArray *buttons;
 }
 
 @property (nonatomic, assign) id<GameBoardViewControllerDelegate> delegate;
