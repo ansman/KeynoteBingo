@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>eventsID</key>
+	<integer>1246569988</integer>
+	<key>events</key>
+	<array>
+		<string>» BINGO! «</string>
+		<string>» BOOM! «</string>
+		<string>» Whooops! «</string>
+		<string>Schiller in shirt and jeans</string>
+		<string>Schiller in turtleneck and jeans</string>
+		<string>Phil with a beard</string>
+		<string>Steve Jobs on stage</string>
+		<string>Steve Jobs is mentioned</string>
+		<string>Phil answers to a audience reaction</string>
+		<string>Phil mentions Keynote Bingo</string>
+		<string>Phil mentions rumors</string>
+		<string>The audience cheers</string>
+		<string>The audience boos</string>
+		<string>Celebrities</string>
+		<string>Bertrand Serlet on stage</string>
+		<string>Scott Forstall demos something</string>
+		<string>Jonathan Ive talks about design</string>
+		<string>Plays a Pixar movie</string>
+		<string>Mentions Walt Mossberg</string>
+		<string>Shows a commercial</string>
+		<string>PC or Mac guy</string>
+		<string>The demo gods strike</string>
+		<string>Throws something to the audience</string>
+		<string>Blu-ray</string>
+		<string>Macs with touch screens</string>
+		<string>&lt;$500 computers</string>
+		<string>Praises Intel</string>
+		<string>GPS functionality in Macs</string>
+		<string>OLED</string>
+		<string>Mentions DisplayPort</string>
+		<string>Mentions standards</string>
+		<string>3G in Macs</string>
+		<string>MacBook mini</string>
+		<string>Docking station</string>
+		<string>Mac &quot;nano&quot;</string>
+		<string>Mac &quot;tablet&quot;</string>
+		<string>Mac Media Center</string>
+		<string>Mac Media Server</string>
+		<string>Quad core iMac</string>
+		<string>Unibody MacBook goes MacBook Pro</string>
+		<string>PowerPC is alive!</string>
+		<string>Mac OS XI</string>
+		<string>Demos Snow Leopard</string>
+		<string>Virtualization</string>
+		<string>Snow Leopard release date</string>
+		<string>Marble appearance</string>
+		<string>Demos OpenCL</string>
+		<string>Demos Grand Central</string>
+		<string>Demos Exchange support</string>
+		<string>Some core technology goes Open Source</string>
+		<string>Demos resolution independence</string>
+		<string>Demos Location API in Snow Leopard</string>
+		<string>Demos Cocoa Finder</string>
+		<string>Demos Safari 4</string>
+		<string>Mentions HTML5</string>
+		<string>Bonjour sharing in Address book</string>
+		<string>Multi-touch technology in Snow Leopard</string>
+		<string>OS X for generic PCs</string>
+		<string>Mac OS X FREE!</string>
+		<string>QuickTime X</string>
+		<string>QuickTime X supports MKV and OGG</string>
+		<string>New hardware fits in a pocket</string>
+		<string>New iPod</string>
+		<string>AppleTV v.3</string>
+		<string>iPhone OS 3 released today</string>
+		<string>iPhone in colors</string>
+		<string>iPhone teathering</string>
+		<string>iPod touch HD</string>
+		<string>Cheap iPhone</string>
+		<string>iPhone 3GS</string>
+		<string>Mentions MP3</string>
+		<string>Handwriting recognition in iPhone</string>
+		<string>Video chat in iPhone</string>
+		<string>Compass in iPhone</string>
+		<string>Demos iPhone games</string>
+		<string>Video Editing in iPhone</string>
+		<string>Video to YouTube in iPhone</string>
+		<string>App Sharing in iPhone</string>
+		<string>Mentions Java</string>
+		<string>Mentions Flash</string>
+		<string>Demos games for Mac</string>
+		<string>Mentions Electronic Arts</string>
+		<string>Mentions Palm</string>
+		<string>Mentions Google</string>
+		<string>Mentions Netbooks</string>
+		<string>Mentions ODF and/or OOXML</string>
+		<string>Mentions Open Source</string>
+		<string>Windows vs. Mac OS X</string>
+		<string>Demos in Windows</string>
+		<string>Mentions the Cloud</string>
+		<string>Mentions Linux</string>
+		<string>Mentions viruses</string>
+		<string>Mentions iTunes Store sales</string>
+		<string>Mentions AppStore sales</string>
+		<string>AAPL &gt;$150</string>
+		<string>AAPL &lt;$150</string>
+		<string>Mentions patents</string>
+		<string>Best year ever!</string>
+		<string>P80 bundled with Sydney and St Thomas</string>
+		<string>&quot;One more thing&quot;</string>
+	</array>
+</dict>
+</plist>

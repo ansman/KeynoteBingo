@@ -1,0 +1,320 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1D3623260D0F684500981E51 /* KeynoteBingoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* KeynoteBingoAppDelegate.m */; };
+		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		352A6DFB0FFBE51300D81DEB /* LoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 352A6DFA0FFBE51300D81DEB /* LoadingViewController.m */; };
+		352A6E070FFBE66D00D81DEB /* bingoBig.png in Resources */ = {isa = PBXBuildFile; fileRef = 352A6E060FFBE66D00D81DEB /* bingoBig.png */; };
+		3546913D0FFD58AB003423CF /* events.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3546913C0FFD58AB003423CF /* events.plist */; };
+		354691610FFD59D8003423CF /* EventManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 354691600FFD59D8003423CF /* EventManager.m */; };
+		354691AE0FFD5B62003423CF /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 354691AD0FFD5B62003423CF /* AudioToolbox.framework */; };
+		3549E35E0FE847EB00D69649 /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3549E35D0FE847EB00D69649 /* button.png */; };
+		35718D090FFBB37C00666D9B /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35718D070FFBB37C00666D9B /* SettingsViewController.m */; };
+		35725DE70FFA4B9100E7DE5F /* bingo.wav in Resources */ = {isa = PBXBuildFile; fileRef = 35725DE60FFA4B9100E7DE5F /* bingo.wav */; };
+		3584861310024FE6000A3792 /* TransitionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3584861210024FE6000A3792 /* TransitionManager.m */; };
+		358488A310028FCD000A3792 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 358488A210028FCD000A3792 /* Default.png */; };
+		35884EA20FE7262000BAD10F /* Bingo.png in Resources */ = {isa = PBXBuildFile; fileRef = 35884E9A0FE7262000BAD10F /* Bingo.png */; };
+		35884EA30FE7262000BAD10F /* buttonSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 35884E9B0FE7262000BAD10F /* buttonSelected.png */; };
+		3588C58A0FE541E3008B2C66 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3588C5890FE541E3008B2C66 /* GameViewController.m */; };
+		3588C58D0FE541F2008B2C66 /* GameBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3588C58C0FE541F2008B2C66 /* GameBoardViewController.m */; };
+		3588C5910FE5487D008B2C66 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3588C5900FE5487D008B2C66 /* MenuViewController.m */; };
+		3597149C0FFACDE20065CCB3 /* buttonOverlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 3597149B0FFACDE20065CCB3 /* buttonOverlay.png */; };
+		35A5EBE30FF917A300779FC5 /* KeynoteButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 35A5EBE20FF917A300779FC5 /* KeynoteButton.m */; };
+		35B92F100FEAB05000E639AE /* backgroundImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 35B92F0F0FEAB05000E639AE /* backgroundImage.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1D3623240D0F684500981E51 /* KeynoteBingoAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeynoteBingoAppDelegate.h; sourceTree = "<group>"; };
+		1D3623250D0F684500981E51 /* KeynoteBingoAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeynoteBingoAppDelegate.m; sourceTree = "<group>"; };
+		1D6058910D05DD3D006BFB54 /* KeynoteBingo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeynoteBingo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		32CA4F630368D1EE00C91783 /* KeynoteBingo_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeynoteBingo_Prefix.pch; sourceTree = "<group>"; };
+		352A6DF90FFBE51300D81DEB /* LoadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingViewController.h; sourceTree = "<group>"; };
+		352A6DFA0FFBE51300D81DEB /* LoadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingViewController.m; sourceTree = "<group>"; };
+		352A6E060FFBE66D00D81DEB /* bingoBig.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bingoBig.png; sourceTree = "<group>"; };
+		3546913C0FFD58AB003423CF /* events.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = events.plist; sourceTree = "<group>"; };
+		3546915F0FFD59D8003423CF /* EventManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventManager.h; sourceTree = "<group>"; };
+		354691600FFD59D8003423CF /* EventManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventManager.m; sourceTree = "<group>"; };
+		354691AD0FFD5B62003423CF /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		3549E35D0FE847EB00D69649 /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
+		35718D070FFBB37C00666D9B /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		35718D080FFBB37C00666D9B /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		35725DE60FFA4B9100E7DE5F /* bingo.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bingo.wav; sourceTree = "<group>"; };
+		3584861110024FE6000A3792 /* TransitionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransitionManager.h; sourceTree = "<group>"; };
+		3584861210024FE6000A3792 /* TransitionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransitionManager.m; sourceTree = "<group>"; };
+		358488A210028FCD000A3792 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		35884E9A0FE7262000BAD10F /* Bingo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Bingo.png; sourceTree = "<group>"; };
+		35884E9B0FE7262000BAD10F /* buttonSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonSelected.png; sourceTree = "<group>"; };
+		3588C5880FE541E3008B2C66 /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
+		3588C5890FE541E3008B2C66 /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
+		3588C58B0FE541F2008B2C66 /* GameBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameBoardViewController.h; sourceTree = "<group>"; };
+		3588C58C0FE541F2008B2C66 /* GameBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameBoardViewController.m; sourceTree = "<group>"; };
+		3588C58F0FE5487D008B2C66 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
+		3588C5900FE5487D008B2C66 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
+		3597149B0FFACDE20065CCB3 /* buttonOverlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonOverlay.png; sourceTree = "<group>"; };
+		35A5EBE10FF917A300779FC5 /* KeynoteButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeynoteButton.h; sourceTree = "<group>"; };
+		35A5EBE20FF917A300779FC5 /* KeynoteButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeynoteButton.m; sourceTree = "<group>"; };
+		35B92F0F0FEAB05000E639AE /* backgroundImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundImage.png; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1D60588F0D05DD3D006BFB54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
+				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
+				354691AE0FFD5B62003423CF /* AudioToolbox.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				3584861110024FE6000A3792 /* TransitionManager.h */,
+				3584861210024FE6000A3792 /* TransitionManager.m */,
+				35718D080FFBB37C00666D9B /* SettingsViewController.h */,
+				35718D070FFBB37C00666D9B /* SettingsViewController.m */,
+				3546915F0FFD59D8003423CF /* EventManager.h */,
+				354691600FFD59D8003423CF /* EventManager.m */,
+				3588C58B0FE541F2008B2C66 /* GameBoardViewController.h */,
+				3588C58C0FE541F2008B2C66 /* GameBoardViewController.m */,
+				3588C5880FE541E3008B2C66 /* GameViewController.h */,
+				3588C5890FE541E3008B2C66 /* GameViewController.m */,
+				3588C58F0FE5487D008B2C66 /* MenuViewController.h */,
+				3588C5900FE5487D008B2C66 /* MenuViewController.m */,
+				1D3623240D0F684500981E51 /* KeynoteBingoAppDelegate.h */,
+				1D3623250D0F684500981E51 /* KeynoteBingoAppDelegate.m */,
+				35A5EBE10FF917A300779FC5 /* KeynoteButton.h */,
+				35A5EBE20FF917A300779FC5 /* KeynoteButton.m */,
+				352A6DF90FFBE51300D81DEB /* LoadingViewController.h */,
+				352A6DFA0FFBE51300D81DEB /* LoadingViewController.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1D6058910D05DD3D006BFB54 /* KeynoteBingo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
+			isa = PBXGroup;
+			children = (
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				35884E710FE7254B00BAD10F /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = CustomTemplate;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				32CA4F630368D1EE00C91783 /* KeynoteBingo_Prefix.pch */,
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				354691AD0FFD5B62003423CF /* AudioToolbox.framework */,
+				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
+				1D30AB110D05D00D00671497 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		35884E710FE7254B00BAD10F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				358488A210028FCD000A3792 /* Default.png */,
+				8D1107310486CEB800E47090 /* Info.plist */,
+				3546913C0FFD58AB003423CF /* events.plist */,
+				3597149B0FFACDE20065CCB3 /* buttonOverlay.png */,
+				35B92F0F0FEAB05000E639AE /* backgroundImage.png */,
+				35725DE60FFA4B9100E7DE5F /* bingo.wav */,
+				3549E35D0FE847EB00D69649 /* button.png */,
+				35884E9B0FE7262000BAD10F /* buttonSelected.png */,
+				352A6E060FFBE66D00D81DEB /* bingoBig.png */,
+				35884E9A0FE7262000BAD10F /* Bingo.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1D6058900D05DD3D006BFB54 /* KeynoteBingo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "KeynoteBingo" */;
+			buildPhases = (
+				1D60588D0D05DD3D006BFB54 /* Resources */,
+				1D60588E0D05DD3D006BFB54 /* Sources */,
+				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KeynoteBingo;
+			productName = KeynoteBingo;
+			productReference = 1D6058910D05DD3D006BFB54 /* KeynoteBingo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "KeynoteBingo" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1D6058900D05DD3D006BFB54 /* KeynoteBingo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1D60588D0D05DD3D006BFB54 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				35884EA20FE7262000BAD10F /* Bingo.png in Resources */,
+				35884EA30FE7262000BAD10F /* buttonSelected.png in Resources */,
+				3549E35E0FE847EB00D69649 /* button.png in Resources */,
+				35B92F100FEAB05000E639AE /* backgroundImage.png in Resources */,
+				35725DE70FFA4B9100E7DE5F /* bingo.wav in Resources */,
+				3597149C0FFACDE20065CCB3 /* buttonOverlay.png in Resources */,
+				352A6E070FFBE66D00D81DEB /* bingoBig.png in Resources */,
+				3546913D0FFD58AB003423CF /* events.plist in Resources */,
+				358488A310028FCD000A3792 /* Default.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1D60588E0D05DD3D006BFB54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				1D3623260D0F684500981E51 /* KeynoteBingoAppDelegate.m in Sources */,
+				3588C58A0FE541E3008B2C66 /* GameViewController.m in Sources */,
+				3588C58D0FE541F2008B2C66 /* GameBoardViewController.m in Sources */,
+				3588C5910FE5487D008B2C66 /* MenuViewController.m in Sources */,
+				35A5EBE30FF917A300779FC5 /* KeynoteButton.m in Sources */,
+				35718D090FFBB37C00666D9B /* SettingsViewController.m in Sources */,
+				352A6DFB0FFBE51300D81DEB /* LoadingViewController.m in Sources */,
+				354691610FFD59D8003423CF /* EventManager.m in Sources */,
+				3584861310024FE6000A3792 /* TransitionManager.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1D6058940D05DD3E006BFB54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = KeynoteBingo_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				PRODUCT_NAME = KeynoteBingo;
+			};
+			name = Debug;
+		};
+		1D6058950D05DD3E006BFB54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = KeynoteBingo_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				PRODUCT_NAME = KeynoteBingo;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = iphoneos3.0;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = iphoneos3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "KeynoteBingo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1D6058940D05DD3E006BFB54 /* Debug */,
+				1D6058950D05DD3E006BFB54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "KeynoteBingo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
