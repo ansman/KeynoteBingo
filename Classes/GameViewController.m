@@ -31,9 +31,7 @@
 		gameBoard.container = self;
 		
 		[gameBoardView addSubview:gameBoard.view];
-		
-		boardNumber = [[NSNumber alloc] initWithInt:0];
-		
+				
 		CFBundleRef mainBundle = CFBundleGetMainBundle();
 		CFURLRef soundFileURLRef = CFBundleCopyResourceURL(mainBundle, CFSTR("bingo"), CFSTR("wav"), NULL);
 		AudioServicesCreateSystemSoundID(soundFileURLRef, &audioPlayerID);
@@ -58,6 +56,11 @@
 	if([[NSUserDefaults standardUserDefaults] floatForKey:@"zoomScale"] != 0) {
 		boardNumber = [[NSNumber alloc] initWithInt:[[NSUserDefaults standardUserDefaults] integerForKey:@"boardNumber"]];
 		
+		if([boardNumber intValue] <= 0 || [boardNumber intValue] >= 2147483646){
+			[boardNumber release];
+			boardNumber = nil;
+		}
+		
 		CGPoint point = CGPointMake([[NSUserDefaults standardUserDefaults] floatForKey:@"contentOffsetX"], [[NSUserDefaults standardUserDefaults] floatForKey:@"contentOffsetY"]);
 			
 		[gameBoardView setContentOffset:point animated:NO];
@@ -78,7 +81,7 @@
 }
 
 - (BOOL) gameHasStarted {
-	return boardNumber.intValue != 0;
+	return boardNumber != nil;
 }
 
 - (void) newGame: (NSNumber *)newBoardNumber {
@@ -109,12 +112,7 @@
 	return gameBoard.view;
 }
 
-- (void) viewWillAppear: (BOOL) animated {
-	if(!boardNumber) {
-		[delegate pickNewGame];
-		return;
-	}
-	
+- (void) viewWillAppear: (BOOL) animated {	
 	boardNumberLabel.text = [NSString stringWithFormat:@"Board #%@", boardNumber];
 	[self.gameBoard viewWillAppear:animated];
 }

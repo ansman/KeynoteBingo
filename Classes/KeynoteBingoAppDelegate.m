@@ -107,8 +107,10 @@ int SETTINGS_VIEW = 2;
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-	[gameViewController saveSettings];
-	[self saveWhichView];
+	if(![loadingViewController.view superview]) {
+		[gameViewController saveSettings];
+		[self saveWhichView];
+	}
 }
 
 - (void) loadSettings {
@@ -129,12 +131,12 @@ int SETTINGS_VIEW = 2;
 - (void) saveWhichView {
 	int activeView;
 	
-	if([menuViewController.view superview] != nil)
-		activeView = MENU_VIEW;
-	else if([gameViewController.view superview] != nil)
+	if([[settingsViewController getView] superview])
+		activeView = SETTINGS_VIEW;
+	else if([gameViewController.view superview])
 		activeView = GAME_VIEW;
 	else
-		activeView = SETTINGS_VIEW;
+		activeView = MENU_VIEW;
 	
 	[[NSUserDefaults standardUserDefaults] setInteger:activeView forKey:@"activeView"];
 }
