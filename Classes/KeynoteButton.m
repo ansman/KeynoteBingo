@@ -84,7 +84,7 @@
 			break;
 		}
 	}
-	
+		
 	if(oldValue != self.highlighted)
 		[self setNeedsDisplay];
 }
@@ -258,21 +258,15 @@
 - (void)drawRect:(CGRect)rect {
 	NSUInteger index;
 	
-	switch (super.state) {
-		case UIControlStateHighlighted:
-			index = 1;
-			break;
-		case UIControlStateDisabled:
-			index = 2;
-			break;
-		case UIControlStateSelected:
-			index = 3;
-			break;
-		default:
-			index = 0;
-			break;
-	}
-	
+	if(!self.enabled)
+		index = 2;
+	else if(self.selected)
+		index = 3;
+	else if(self.highlighted)
+		index = 1;
+	else
+		index = 0;
+			
 	id object1 = [images objectAtIndex:index];
 	id object2 = [titles objectAtIndex:index];
 	id object3 = [titleColors objectAtIndex:index];
