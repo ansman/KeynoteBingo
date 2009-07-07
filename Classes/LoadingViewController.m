@@ -19,18 +19,17 @@
 
 @synthesize delegate;
 
-- (id) init {
+/*- (id) init {
 	if(self = [super init]) {
-		progressLabel = [[UILabel alloc] init];
+		progressLabel = [[UILabel alloc] initWithFrame:<#(CGRect)frame#>];
 		cancelButton = [[UIButton buttonWithType:UIButtonTypeRoundedRect] retain];
 	}
 	return self;
-}
+}*/
 
 - (void) setLoadingText:(NSString *)loadingText {
-	progressLabel.text = loadingText;
+	[progressLabel setText:loadingText];
 }
-
 
 
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
@@ -52,13 +51,16 @@
 	
 	[indicator release];
 	
-	progressLabel.frame = CGRectMake(0, 349, 320, 30);
+	[progressLabel release];
+	progressLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 349, 320, 30)];
 	progressLabel.textAlignment = UITextAlignmentCenter;
 	progressLabel.font = [UIFont boldSystemFontOfSize:20];
 	progressLabel.textColor = [UIColor whiteColor];
 	progressLabel.backgroundColor = [UIColor clearColor];
 	[self.view addSubview:progressLabel];
 	
+	[cancelButton release];
+	cancelButton = [[UIButton buttonWithType:UIButtonTypeRoundedRect] retain];
 	cancelButton.frame = CGRectMake(95, 399, 120, 37);
 	[cancelButton addTarget:delegate action:@selector(cancelUpdate) forControlEvents:UIControlEventTouchUpInside];
 	[cancelButton setTitle:@"Cancel Update" forState:UIControlStateNormal];

@@ -25,7 +25,6 @@
 @end
 
 
-
 @interface GameViewController : UIViewController <UIScrollViewDelegate, GameBoardViewControllerContainer> {
 	
 	id<GameViewControllerDelegate> delegate;

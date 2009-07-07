@@ -11,6 +11,7 @@
 @interface GameBoardViewController (PrivateMethods)
 
 - (void) loadSettings;
+- (void) placeEvents;
 
 @end
 
@@ -37,7 +38,6 @@
 			[button setButtonImage:buttonImageNormal forState:UIControlStateNormal];
 			[button setButtonImage:buttonImageSelected forState:UIControlStateSelected];
 			[button setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
-			
 			[button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
 			[array addObject:button];
 		}
@@ -84,7 +84,9 @@
 	
 	if([eventManager hasNewEvents])
 		[self resetBoard];
-
+	
+	[self placeEvents];
+	
 	[delegate loadingComplete];
 }
 
@@ -125,6 +127,7 @@
 
 - (void) newGame {
 	[self resetBoard];
+	[self placeEvents];
 }
 
 - (void)loadView {
@@ -135,7 +138,7 @@
 			[self.view addSubview:[buttons objectAtIndex:i*5+j]];
 }
 
-- (void) viewWillAppear: (BOOL) animated {
+- (void) placeEvents {
 	int numberOfEvents = [events count];
 	
 	BOOL pickedNumbers[numberOfEvents];
@@ -151,7 +154,6 @@
 		do {
 			number = rand() % numberOfEvents;
 		} while (pickedNumbers[number]);
-		
 		pickedNumbers[number] = YES;
 		[button setTitle:[events objectAtIndex:number] forState:UIControlStateNormal];
 	}

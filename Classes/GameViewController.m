@@ -32,8 +32,10 @@
 		
 		[gameBoardView addSubview:gameBoard.view];
 		
-		CFBundleRef mainBundle = CFBundleGetMainBundle ();
-		CFURLRef soundFileURLRef = CFBundleCopyResourceURL(mainBundle, CFSTR ("bingo"), CFSTR ("wav"), NULL);
+		boardNumber = [[NSNumber alloc] initWithInt:0];
+		
+		CFBundleRef mainBundle = CFBundleGetMainBundle();
+		CFURLRef soundFileURLRef = CFBundleCopyResourceURL(mainBundle, CFSTR("bingo"), CFSTR("wav"), NULL);
 		AudioServicesCreateSystemSoundID(soundFileURLRef, &audioPlayerID);
 		
 		[self loadSettings];
@@ -76,7 +78,7 @@
 }
 
 - (BOOL) gameHasStarted {
-	return boardNumber != nil;
+	return boardNumber.intValue != 0;
 }
 
 - (void) newGame: (NSNumber *)newBoardNumber {
@@ -108,7 +110,12 @@
 }
 
 - (void) viewWillAppear: (BOOL) animated {
-	 boardNumberLabel.text = [NSString stringWithFormat:@"Board #%@", boardNumber];
+	if(!boardNumber) {
+		[delegate pickNewGame];
+		return;
+	}
+	
+	boardNumberLabel.text = [NSString stringWithFormat:@"Board #%@", boardNumber];
 	[self.gameBoard viewWillAppear:animated];
 }
 

@@ -19,8 +19,6 @@
 
 @implementation KeynoteBingoAppDelegate
 
-@synthesize eventManager;
-
 int MENU_VIEW = 0;
 int GAME_VIEW = 1;
 int SETTINGS_VIEW = 2;
@@ -161,9 +159,7 @@ int SETTINGS_VIEW = 2;
 
 - (void) newGame:(NSNumber *)boardNumber {			
 	[gameViewController newGame:boardNumber];
-	
-	if ([menuViewController.view superview] != nil)
-		[self performTransition:menuViewController.view newView:gameViewController.view transitionType:TransitionTypeReveal];
+	[self performTransition:menuViewController.view newView:gameViewController.view transitionType:TransitionTypeReveal];
 }
 
 - (BOOL) gameHasStarted {

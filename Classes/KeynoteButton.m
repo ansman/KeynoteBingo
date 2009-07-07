@@ -12,7 +12,6 @@
 
 @synthesize titleLabel, buttonOverlay, useButtonOverlay;
 
-
 - (id)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
 		self.backgroundColor = [UIColor clearColor];
@@ -116,6 +115,8 @@
 		object = [NSNull null];
 	
 	[titles replaceObjectAtIndex:index withObject:object];
+	
+	[self setNeedsDisplay];
 }
 
 - (void) setTitleColor:(UIColor *)color forState:(UIControlState)state {
@@ -144,6 +145,8 @@
 		object = [NSNull null];
 	
 	[titleColors replaceObjectAtIndex:index withObject:object];
+	
+	[self setNeedsDisplay];
 }
 
 - (void) setButtonImage:(UIImage *)image forState:(UIControlState)state {
@@ -172,6 +175,8 @@
 		object = [NSNull null];
 	
 	[images replaceObjectAtIndex:index withObject:object];
+	
+	[self setNeedsDisplay];
 }
 
 - (NSString *) titleForState:(UIControlState)state {

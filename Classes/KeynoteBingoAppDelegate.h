@@ -29,7 +29,5 @@
 	TransitionManager *transitionManager;
 }
 
-@property (nonatomic, readonly) EventManager *eventManager;
-
 @end
 
