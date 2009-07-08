@@ -92,6 +92,11 @@ int SETTINGS_VIEW = 2;
 	[transitionManager startTransition];
 }
 
+- (void) transitionDidStop:(TransitionManager *)whichTransitionManager {
+	if(whichTransitionManager.newView.tag == menuViewController.view.tag)
+		[menuViewController transitionDidStop];
+}
+
 - (void) cancelUpdate {
 	[eventManager cancelUpdate];
 }

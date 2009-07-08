@@ -15,7 +15,7 @@
 @end
 
 
-@interface MenuViewController : UIViewController <UITextFieldDelegate> {
+@interface MenuViewController : UIViewController {
 	id<MenuViewControllerDelegate> delegate;
 	
 	@private
@@ -25,5 +25,7 @@
 }
 
 @property (nonatomic, assign) id<MenuViewControllerDelegate> delegate;
+
+- (void) transitionDidStop;
 
 @end

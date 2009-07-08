@@ -28,7 +28,6 @@
 		3588C5910FE5487D008B2C66 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3588C5900FE5487D008B2C66 /* MenuViewController.m */; };
 		3597149C0FFACDE20065CCB3 /* buttonOverlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 3597149B0FFACDE20065CCB3 /* buttonOverlay.png */; };
 		35A5EBE30FF917A300779FC5 /* KeynoteButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 35A5EBE20FF917A300779FC5 /* KeynoteButton.m */; };
-		35B92F100FEAB05000E639AE /* backgroundImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 35B92F0F0FEAB05000E639AE /* backgroundImage.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,7 +63,6 @@
 		3597149B0FFACDE20065CCB3 /* buttonOverlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonOverlay.png; sourceTree = "<group>"; };
 		35A5EBE10FF917A300779FC5 /* KeynoteButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeynoteButton.h; sourceTree = "<group>"; };
 		35A5EBE20FF917A300779FC5 /* KeynoteButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeynoteButton.m; sourceTree = "<group>"; };
-		35B92F0F0FEAB05000E639AE /* backgroundImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundImage.png; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -153,7 +151,6 @@
 				8D1107310486CEB800E47090 /* Info.plist */,
 				3546913C0FFD58AB003423CF /* events.plist */,
 				3597149B0FFACDE20065CCB3 /* buttonOverlay.png */,
-				35B92F0F0FEAB05000E639AE /* backgroundImage.png */,
 				35725DE60FFA4B9100E7DE5F /* bingo.wav */,
 				3549E35D0FE847EB00D69649 /* button.png */,
 				35884E9B0FE7262000BAD10F /* buttonSelected.png */,
@@ -208,7 +205,6 @@
 				35884EA20FE7262000BAD10F /* Bingo.png in Resources */,
 				35884EA30FE7262000BAD10F /* buttonSelected.png in Resources */,
 				3549E35E0FE847EB00D69649 /* button.png in Resources */,
-				35B92F100FEAB05000E639AE /* backgroundImage.png in Resources */,
 				35725DE70FFA4B9100E7DE5F /* bingo.wav in Resources */,
 				3597149C0FFACDE20065CCB3 /* buttonOverlay.png in Resources */,
 				352A6E070FFBE66D00D81DEB /* bingoBig.png in Resources */,

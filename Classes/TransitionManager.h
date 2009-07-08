@@ -22,8 +22,8 @@ typedef enum {
 @protocol TransitionManagerDelegate <NSObject>
 
 @optional
-- (void) tranistionDidStop:(TransitionManager *)transitionManager;
-- (void) tranistionWillStart:(TransitionManager *)transitionManager;
+- (void) transitionDidStop:(TransitionManager *)transitionManager;
+- (void) transitionWillStart:(TransitionManager *)transitionManager;
 
 @end
 

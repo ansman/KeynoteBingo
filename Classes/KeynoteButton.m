@@ -266,7 +266,7 @@
 		index = 1;
 	else
 		index = 0;
-			
+	
 	id object1 = [images objectAtIndex:index];
 	id object2 = [titles objectAtIndex:index];
 	id object3 = [titleColors objectAtIndex:index];

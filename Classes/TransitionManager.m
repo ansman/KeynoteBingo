@@ -130,8 +130,8 @@
 }
 
 - (void)animationWillStart:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
-	if([delegate respondsToSelector:@selector(tranistionWillStart:)])
-		[delegate performSelector:@selector(tranistionWillStart:) withObject:self];
+	if([delegate respondsToSelector:@selector(transitionWillStart:)])
+		[delegate performSelector:@selector(transitionWillStart:) withObject:self];
 }
 
 - (void)animationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
@@ -144,8 +144,8 @@
 		
 	[[UIApplication sharedApplication] endIgnoringInteractionEvents];
 	
-	if([delegate respondsToSelector:@selector(tranistionDidStop:)])
-		[delegate performSelector:@selector(tranistionDidStop:) withObject:self];
+	if([delegate respondsToSelector:@selector(transitionDidStop:)])
+		[delegate performSelector:@selector(transitionDidStop:) withObject:self];
 }
 
 @end

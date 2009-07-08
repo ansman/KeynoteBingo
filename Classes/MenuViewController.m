@@ -17,7 +17,6 @@
 
 @end
 
-
 @implementation MenuViewController
 
 @synthesize delegate;
@@ -29,11 +28,8 @@
 
 - (void) loadView {
 	self.view = [[UIView alloc] initWithFrame:CGRectMake(0, 19, 320, 461)];
-	
-	UIImageView *background = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"backgroundImage.png"]] autorelease];
-	background.frame = CGRectMake(0, 0, 320, 480);
-	background.backgroundColor = [UIColor whiteColor];
-	[self.view addSubview:background];
+	self.view.tag = 42;
+	self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
 	
 	UIToolbar *navBar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)] autorelease];
 	
@@ -57,15 +53,15 @@
 	[self.view addSubview:newGameLabel];
 	
 	UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(20, 58, 280, 20)] autorelease];
-	label.text = @"Please enter a positive integer:";
+	label.text = @"Enter a number:";
 	label.textAlignment = UITextAlignmentCenter;
-	label.textColor = [UIColor whiteColor];
+	label.textColor = [UIColor darkGrayColor];
 	label.font = [UIFont boldSystemFontOfSize:17];
 	label.backgroundColor = [UIColor clearColor];
 	[self.view addSubview:label];
 	
 	[numberInput release];
-	numberInput = [[UITextField alloc] initWithFrame:CGRectMake(60, 105, 200, 31)];
+	numberInput = [[UITextField alloc] initWithFrame:CGRectMake(60, 90, 200, 31)];
 	numberInput.placeholder = @"Enter a number";
 	numberInput.textAlignment = UITextAlignmentCenter;
 	numberInput.borderStyle = UITextBorderStyleRoundedRect;
@@ -76,19 +72,19 @@
 	[self.view addSubview:numberInput];
 	
 	UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-	button.frame = CGRectMake(89, 154, 142, 37);
+	button.frame = CGRectMake(15, 140, 140, 37);
 	[button setTitle:@"Use this number" forState:UIControlStateNormal];
 	[button addTarget:self action:@selector(numberChoosen) forControlEvents:UIControlEventTouchUpInside];
 	[self.view addSubview:button];
 	
 	button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-	button.frame = CGRectMake(87, 206, 147, 37);
+	button.frame = CGRectMake(165, 140, 140, 37);
 	[button setTitle:@"Random number" forState:UIControlStateNormal];
 	[button addTarget:self action:@selector(randomNumber) forControlEvents:UIControlEventTouchUpInside];
 	[self.view addSubview:button];
 	
 	[errorLabel release];
-	errorLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 241, 280, 54)];
+	errorLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 180, 280, 54)];
 	errorLabel.numberOfLines = 0;
 	errorLabel.textColor = [UIColor redColor];
 	errorLabel.backgroundColor = [UIColor clearColor];
@@ -96,9 +92,9 @@
 	[self.view addSubview:errorLabel];
 }
 
-- (BOOL) textFieldShouldReturn: (UITextField *) theTextField {
-	[self closeKeyboard];
-	return YES;
+- (void) transitionDidStop {
+	if(self.view.superview)
+		[numberInput becomeFirstResponder];
 }
 
 - (void) closeKeyboard {
@@ -113,14 +109,13 @@
 }
 
 - (void) numberChoosen {
-	[self closeKeyboard];
 	int number = numberInput.text.intValue;
 	
 	if(number <= 0 || number >= 2147483646){
 		errorLabel.text = @"Please enter a number between 0 and 2147483646";
 		return;
 	}
-	
+	[numberInput resignFirstResponder];
 	[self.delegate newGame:[NSNumber numberWithInt:number]];
 }
 
