@@ -173,10 +173,6 @@
 	eventManager.reciever = self;
 }
 
-- (void) loadEvents {
-	[eventManager loadEvents];
-}
-
 - (void)dealloc {
 	[events release];
 	[buttons release];

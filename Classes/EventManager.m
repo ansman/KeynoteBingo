@@ -46,6 +46,7 @@ NSString *LAST_UPDATE_URL = @"http://keynote.se/iphone/events-update-time.txt";
 		status = EventManagerStatusIdle;
 		[connection cancel];
 		[connection release];
+		connection = nil;
 		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 		[delegate setLoadingText:@""];
 		[reciever eventsLoaded:self.events];
@@ -199,18 +200,30 @@ NSString *LAST_UPDATE_URL = @"http://keynote.se/iphone/events-update-time.txt";
 	
 	[delegate setLoadingText:@"Loading events from file..."];
 	
-	NSString *path = [NSString stringWithFormat:@"%@/Library/Caches/events.plist", NSHomeDirectory()];
+	NSString *pathDefault = [NSString stringWithFormat:@"%@/Library/Caches/events.plist", NSHomeDirectory()];
+	NSDictionary *rootDictCached = [NSDictionary dictionaryWithContentsOfFile:pathDefault];
 	
-	NSDictionary *rootDict = [NSDictionary dictionaryWithContentsOfFile:path];
+	NSString *pathCached = [[NSBundle mainBundle] pathForResource:@"events" ofType:@"plist"];
+	NSDictionary *rootDictDefault = [NSDictionary dictionaryWithContentsOfFile:pathCached];
 	
-	if(rootDict == nil) {
-		path = [[NSBundle mainBundle] pathForResource:@"events" ofType:@"plist"];
-		rootDict = [NSDictionary dictionaryWithContentsOfFile:path];
+	if(!rootDictCached) {
+		eventsID = ((NSNumber *)[rootDictDefault objectForKey:@"eventsID"]).intValue;
+		lastFetch = 0;
+		self.events = [rootDictDefault objectForKey:@"events"];
 	}
-	
-	lastFetch = ((NSNumber *)[rootDict objectForKey:@"last_update"]).intValue;
-	eventsID= ((NSNumber *)[rootDict objectForKey:@"eventsID"]).intValue;
-	self.events = [rootDict objectForKey:@"events"];
+	else {
+		eventsID = ((NSNumber *)[rootDictDefault objectForKey:@"eventsID"]).intValue;
+		newEventsID = ((NSNumber *)[rootDictCached objectForKey:@"eventsID"]).intValue;
+		
+		if(eventsID > newEventsID) {
+			lastFetch = 0;
+			self.events = [rootDictDefault objectForKey:@"events"];
+		}
+		else {
+			lastFetch = ((NSNumber *)[rootDictCached objectForKey:@"last_update"]).intValue;
+			self.events = [rootDictCached objectForKey:@"events"];
+		}
+	}
 }
 
 - (NSArray *) processEventsData: (NSData *)data {

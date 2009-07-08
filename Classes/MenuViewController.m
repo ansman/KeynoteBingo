@@ -120,6 +120,7 @@
 }
 
 - (void) returnToGame {
+	[self closeKeyboard];
 	[delegate returnToGame];
 }
 

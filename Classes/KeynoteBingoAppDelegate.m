@@ -102,7 +102,7 @@ int SETTINGS_VIEW = 2;
 }
 
 - (void) loadEvents {
-	[gameBoardViewController loadEvents];
+	[eventManager loadEvents];
 }
 
 - (void)loadingComplete {

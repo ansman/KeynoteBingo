@@ -45,7 +45,6 @@
 
 - (void) newGame;
 - (BOOL) checkBingo;
-- (void) loadEvents;
 - (void) resetBoard;
 
 @end

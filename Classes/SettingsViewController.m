@@ -190,14 +190,18 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	if(indexPath.row == 2 && indexPath.section == 1 && [delegate getLastUpdate] != -1) {
-		int oldValue1 = updateInterval;
-		BOOL oldValue2 = automaticUpdate;
-		updateInterval = 0;
-		automaticUpdate = YES;
-		[delegate loadEvents];
-		updateInterval = oldValue1;
-		automaticUpdate = oldValue2;
+	if(indexPath.row == 2 && indexPath.section == 1) {
+		if([delegate getLastUpdate] != -1) {
+			int oldValue1 = updateInterval;
+			BOOL oldValue2 = automaticUpdate;
+			updateInterval = 0;
+			automaticUpdate = YES;
+			[delegate loadEvents];
+			updateInterval = oldValue1;
+			automaticUpdate = oldValue2;
+		}
+		else 
+			[delegate cancelUpdate];
 		[self updateView];
 	}
 	else if(indexPath.row == 4 && indexPath.section == 1) {
@@ -399,10 +403,13 @@
 			cell = [whichTableView dequeueReusableCellWithIdentifier:@"updateNowCell"];
 			if(!cell) {
 				cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"updateNowCell"] autorelease];
-				cell.textLabel.text = @"Update events now";
 				cell.selectionStyle = UITableViewCellSelectionStyleBlue;
 			}
 			
+			if([delegate getLastUpdate] != -1)
+				cell.textLabel.text = @"Update events now";
+			else
+				cell.textLabel.text = @"Cancel update";
 		}
 		else if(indexPath.row == 3) {
 			cell = [whichTableView dequeueReusableCellWithIdentifier:@"updateSwitchCell"];
