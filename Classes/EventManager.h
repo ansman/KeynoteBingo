@@ -35,7 +35,7 @@ typedef enum {
 
 @protocol EventManagerReciver <NSObject>
 
-- (void)eventsLoaded:(NSArray *)eventsLoaded;
+- (void)eventsLoaded;
 
 @end
 

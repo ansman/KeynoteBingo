@@ -31,15 +31,21 @@ NSString *LAST_UPDATE_URL = @"http://keynote.se/iphone/events-update-time.txt";*
 NSString *EVENTS_URL = @"http://ansman.se/keynote_bingo/events.plist";
 NSString *LAST_UPDATE_URL = @"http://ansman.se/keynote_bingo/events-update-time.txt";
 
+- (id) init {
+	if(self = [super init]) {
+		[[NSURLCache sharedURLCache] setMemoryCapacity:0];
+		[[NSURLCache sharedURLCache] setDiskCapacity:0];
+	}
+	return self;
+}
+
 - (void) makeConnection:(NSString *)urlString {
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 	
 	NSURL *url = [[[NSURL alloc] initWithString:urlString] autorelease];
 	NSURLRequest *urlRequest = [[[NSURLRequest alloc] initWithURL:url] autorelease];
 	
-	[connection release];
 	connection = [[NSURLConnection connectionWithRequest:urlRequest delegate:self] retain];
-	[data release];
 	data = [[NSMutableData alloc] init];
 	[connection start];
 }
@@ -48,9 +54,13 @@ NSString *LAST_UPDATE_URL = @"http://ansman.se/keynote_bingo/events-update-time.
 	if(status != EventManagerStatusIdle) {
 		status = EventManagerStatusIdle;
 		[connection cancel];
+		[connection release];
+		connection = nil;
+		[data release];
+		data = nil;
 		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 		[delegate setLoadingText:@""];
-		[reciever eventsLoaded:self.events];
+		[self updateComplete];
 	}
 }
 
@@ -70,8 +80,8 @@ NSString *LAST_UPDATE_URL = @"http://ansman.se/keynote_bingo/events-update-time.
 	[data appendData:newData];
 }
 
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-	NSLog([[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease]);
+- (void)connectionDidFinishLoading:(NSURLConnection *)notUsed {
+	[connection release];
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	if(status == EventManagerStatusChecking) {
 		status = EventManagerStatusIdle;
@@ -79,21 +89,25 @@ NSString *LAST_UPDATE_URL = @"http://ansman.se/keynote_bingo/events-update-time.
 		
 		int newEventsID = string.intValue;
 		
+		[data release];
+		data = nil;
+		
 		if(newEventsID <= eventsID) {
 			lastUpdate = [EventManager dateInFormat:@"%s"].intValue;
 			[self updateComplete];
 			return;
 		}
-		
 		[self updateToNewerEvents];
 	}
 	else if(status == EventManagerStatusUpdating) {
 		status = EventManagerStatusIdle;
 		[delegate setLoadingText:@"Processing fetched data..."];
 		NSDictionary *processedData = [self processEventsData:data];
+		[data release];
+		data = nil;
 		
 		if(processedData != nil) {
-			[events release];
+			[events autorelease];
 			events = [[processedData objectForKey:@"events"] retain];
 			eventsID = ((NSNumber *)[processedData objectForKey:@"eventsID"]).intValue;
 			lastUpdate = [EventManager dateInFormat:@"%s"].intValue;
@@ -108,15 +122,17 @@ NSString *LAST_UPDATE_URL = @"http://ansman.se/keynote_bingo/events-update-time.
 	}	
 }
 
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+- (void)connection:(NSURLConnection *)notUsed didFailWithError:(NSError *)error {
 	status = EventManagerStatusIdle;
+	[connection release];
+	connection = nil;
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"The events could not be loaded"
 													 message:@"The events could not be loaded from the server.\nPlease check your internet connection.\nOld events will be used instead." delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil] autorelease];
 	[alert show];
 }
 
-- (int) getLastUpdate {
+- (int) lastUpdate {
 	if(status == EventManagerStatusIdle)
 		return lastUpdate;
 	else
@@ -161,15 +177,11 @@ NSString *LAST_UPDATE_URL = @"http://ansman.se/keynote_bingo/events-update-time.
 }
 
 - (void) updateComplete {
-	[data release];
-	data = nil;
-	[connection release];
-	connection = nil;
 	[self outputEvents];
 	[delegate setLoadingText:@""];
 	if([delegate respondsToSelector:@selector(updateFinished)])
 		[delegate performSelector:@selector(updateFinished)];
-	[reciever eventsLoaded:self.events];
+	[reciever eventsLoaded];
 }
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
@@ -213,19 +225,20 @@ NSString *LAST_UPDATE_URL = @"http://ansman.se/keynote_bingo/events-update-time.
 	if(!rootDictCached) {
 		eventsID = ((NSNumber *)[rootDictDefault objectForKey:@"eventsID"]).intValue;
 		lastUpdate = 0;
-		[events release];
+		[events autorelease];
 		events = [[rootDictDefault objectForKey:@"events"] retain];
 	}
 	else {
 		eventsID = ((NSNumber *)[rootDictDefault objectForKey:@"eventsID"]).intValue;
 		int eventsIDCached = ((NSNumber *)[rootDictCached objectForKey:@"eventsID"]).intValue;
 		
-		[events release];
 		if(eventsID > eventsIDCached) {
+			[events autorelease];
 			events = [[rootDictDefault objectForKey:@"events"] retain];
 			newEvents = YES;
 		}
 		else {
+			[events autorelease];
 			events = [[rootDictCached objectForKey:@"events"] retain];
 			eventsID = eventsIDCached;
 		}
@@ -250,6 +263,8 @@ NSString *LAST_UPDATE_URL = @"http://ansman.se/keynote_bingo/events-update-time.
 }
 
 - (void) outputEvents {
+	if(!newEvents)
+		return;
 	[delegate setLoadingText:@"Writing events to file..."];
 	NSString *filePath = [NSString stringWithFormat:@"%@/Library/Caches/events.plist", NSHomeDirectory()];
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
@@ -263,7 +278,7 @@ NSString *LAST_UPDATE_URL = @"http://ansman.se/keynote_bingo/events-update-time.
 	[dict release];
 }
 
-- (NSArray *)getEvents {
+- (NSArray *)events {
 	if(status == EventManagerStatusIdle)
 		return [NSArray arrayWithArray:events];
 	else
@@ -271,7 +286,7 @@ NSString *LAST_UPDATE_URL = @"http://ansman.se/keynote_bingo/events-update-time.
 }
 
 - (void) dealloc {
-	[events release];
+	[data release];
 	[super dealloc];
 }
 

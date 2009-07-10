@@ -27,7 +27,6 @@
 
 
 @interface GameBoardViewController : UIViewController <EventManagerReciver> {
-	NSArray *events;
 	BOOL bingo;
 	id<GameBoardViewControllerDelegate> delegate;
 	id<GameBoardViewControllerContainer> container;
@@ -35,16 +34,15 @@
 	
 	@private
 	NSArray *buttons;
+	NSArray *events;
 }
 
 @property (nonatomic, assign) id<GameBoardViewControllerDelegate> delegate;
 @property (nonatomic, assign) id<GameBoardViewControllerContainer> container;
 @property (nonatomic, retain) EventManager *eventManager;
 @property (nonatomic, readonly) BOOL bingo;
-@property (nonatomic, retain) NSArray *events;
 
 - (void) newGame;
-- (BOOL) checkBingo;
 - (void) resetBoard;
 
 @end

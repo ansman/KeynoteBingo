@@ -12,13 +12,14 @@
 
 - (void) loadSettings;
 - (void) placeEvents;
+- (BOOL) checkBingo;
 
 @end
 
 
 @implementation GameBoardViewController
 
-@synthesize delegate, bingo, events, container, eventManager;
+@synthesize delegate, bingo, container, eventManager;
 
 - (id) init {
 	if(self = [super init]) {
@@ -42,7 +43,6 @@
 			[array addObject:button];
 		}
 		buttons = [[NSArray alloc] initWithArray:array];
-		self.events = nil;
 		[self loadSettings];
 	}
 	return self;
@@ -79,13 +79,15 @@
 	[[NSUserDefaults standardUserDefaults] setBool:button.selected forKey:[NSString stringWithFormat:@"button%iSelected", button.tag]];
 }
 
-- (void) eventsLoaded:(NSArray *)newEvents {
-	self.events = newEvents;
-	
+- (void) eventsLoaded {
 	if([eventManager hasNewEvents])
 		[self resetBoard];
 	
-	[self placeEvents];
+	if([eventManager hasNewEvents] || !events) {
+		[events autorelease];
+		events = [[eventManager events] retain];
+		[self placeEvents];
+	}
 	
 	[delegate loadingComplete];
 }
@@ -100,26 +102,26 @@
 		bingoFoundVert = YES;
 		bingoFoundHoriz = YES;
 		for (NSUInteger j = 0; j < 5 && (bingoFoundVert || bingoFoundHoriz); j++) {
-			if (((KeynoteButton *)[buttons objectAtIndex:i*5+j]).selected == NO)
+			if (!((KeynoteButton *)[buttons objectAtIndex:i*5+j]).selected)
 				bingoFoundVert = NO;
-			if (((KeynoteButton *)[buttons objectAtIndex:j*5+i]).selected == NO)
+			if (!((KeynoteButton *)[buttons objectAtIndex:j*5+i]).selected)
 				bingoFoundHoriz = NO;
 		}
 		
-		if (bingoFoundVert == YES)
+		if (bingoFoundVert)
 			return YES;
 		
-		if (bingoFoundHoriz == YES)
+		if (bingoFoundHoriz)
 			return YES;
 		
-		if (((KeynoteButton *)[buttons objectAtIndex:i*6]).selected == NO) 
+		if (!((KeynoteButton *)[buttons objectAtIndex:i*6]).selected) 
 			bingoFoundDiag1 = NO;
 		
-		if (((KeynoteButton *)[buttons objectAtIndex:4+i*4]).selected == NO) 
+		if (!((KeynoteButton *)[buttons objectAtIndex:4+i*4]).selected) 
 			bingoFoundDiag2 = NO;
 	}
 	
-	if (bingoFoundDiag1 == YES || bingoFoundDiag2 == YES)
+	if (bingoFoundDiag1 || bingoFoundDiag2)
 		return YES;
 	else
 		return NO;
@@ -155,7 +157,7 @@
 			number = rand() % numberOfEvents;
 		} while (pickedNumbers[number]);
 		pickedNumbers[number] = YES;
-		[button setTitle:[events objectAtIndex:number] forState:UIControlStateNormal];
+		[button setTitle:[[events objectAtIndex:number] autorelease] forState:UIControlStateNormal];
 	}
 }
 
@@ -174,7 +176,7 @@
 }
 
 - (void)dealloc {
-	[events release];
+	[events autorelease];
 	[buttons release];
 	[eventManager release];
     [super dealloc];
