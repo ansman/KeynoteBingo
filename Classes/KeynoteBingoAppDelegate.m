@@ -173,12 +173,12 @@ int SETTINGS_VIEW = 2;
 	return [gameViewController gameHasStarted];
 }
 
-- (int) getEventsID {
-	return [eventManager getRealEventsID];
+- (int) eventsID {
+	return [eventManager eventsID];
 }
 
-- (int) getLastUpdate {
-	return [eventManager getLastUpdate];
+- (int) lastUpdate {
+	return [eventManager lastUpdate];
 }
 
 - (void) setLoadingText:(NSString *)loadingText {

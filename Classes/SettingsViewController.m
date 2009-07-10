@@ -191,7 +191,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	if(indexPath.row == 2 && indexPath.section == 1) {
-		if([delegate getLastUpdate] != -1) {
+		if([delegate lastUpdate] != -1) {
 			int oldValue1 = updateInterval;
 			BOOL oldValue2 = automaticUpdate;
 			updateInterval = 0;
@@ -388,7 +388,7 @@
 				cell.selectionStyle = UITableViewCellSelectionStyleNone;
 				cell.textLabel.text = @"Last update";
 			}
-			cell.detailTextLabel.text = [SettingsViewController getAgeString:[delegate getLastUpdate]];
+			cell.detailTextLabel.text = [SettingsViewController getAgeString:[delegate lastUpdate]];
 		}
 		else if(indexPath.row == 1) {
 			cell = [whichTableView dequeueReusableCellWithIdentifier:@"eventsIDCell"];
@@ -397,7 +397,7 @@
 				cell.selectionStyle = UITableViewCellSelectionStyleNone;
 				cell.textLabel.text = @"Event bundle ID";
 			}
-			cell.detailTextLabel.text = [NSString stringWithFormat:@"%i", [delegate getEventsID]];
+			cell.detailTextLabel.text = [NSString stringWithFormat:@"%i", [delegate eventsID]];
 		}
 		else if(indexPath.row == 2) {
 			cell = [whichTableView dequeueReusableCellWithIdentifier:@"updateNowCell"];
@@ -406,7 +406,7 @@
 				cell.selectionStyle = UITableViewCellSelectionStyleBlue;
 			}
 			
-			if([delegate getLastUpdate] != -1)
+			if([delegate lastUpdate] != -1)
 				cell.textLabel.text = @"Update events now";
 			else
 				cell.textLabel.text = @"Cancel update";

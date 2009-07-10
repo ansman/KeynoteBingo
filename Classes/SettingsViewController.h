@@ -16,8 +16,8 @@
 - (void) returnToGame;
 - (void) loadEvents;
 - (void) cancelUpdate;
-- (int) getEventsID;
-- (int) getLastUpdate;
+- (int) eventsID;
+- (int) lastUpdate;
 
 @end
 

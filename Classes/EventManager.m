@@ -13,8 +13,9 @@
 - (void) checkForNewerEvents;
 - (void) updateToNewerEvents;
 - (void) makeConnection:(NSString *)urlString;
-- (NSArray *) processEventsData: (NSData *)data;
+- (NSDictionary *) processEventsData: (NSData *)data;
 - (void) updateComplete;
+- (void) outputEvents;
 - (void) loadEventsFromInternet;
 - (void) loadEventsFromFile;
 
@@ -22,14 +23,13 @@
 
 @implementation EventManager
 
-@synthesize events;
-@synthesize delegate;
-@synthesize settingsDelegate;
-@synthesize reciever;
-@synthesize status;
+@synthesize events, delegate, settingsDelegate, reciever, status, lastUpdate, newEvents, eventsID;
 
-NSString *EVENTS_URL = @"http://keynote.se/iphone/events.plist";
-NSString *LAST_UPDATE_URL = @"http://keynote.se/iphone/events-update-time.txt";
+/*NSString *EVENTS_URL = @"http://keynote.se/iphone/events.plist";
+NSString *LAST_UPDATE_URL = @"http://keynote.se/iphone/events-update-time.txt";*/
+
+NSString *EVENTS_URL = @"http://ansman.se/keynote_bingo/events.plist";
+NSString *LAST_UPDATE_URL = @"http://ansman.se/keynote_bingo/events-update-time.txt";
 
 - (void) makeConnection:(NSString *)urlString {
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
@@ -37,7 +37,10 @@ NSString *LAST_UPDATE_URL = @"http://keynote.se/iphone/events-update-time.txt";
 	NSURL *url = [[[NSURL alloc] initWithString:urlString] autorelease];
 	NSURLRequest *urlRequest = [[[NSURLRequest alloc] initWithURL:url] autorelease];
 	
+	[connection release];
 	connection = [[NSURLConnection connectionWithRequest:urlRequest delegate:self] retain];
+	[data release];
+	data = [[NSMutableData alloc] init];
 	[connection start];
 }
 
@@ -45,8 +48,6 @@ NSString *LAST_UPDATE_URL = @"http://keynote.se/iphone/events-update-time.txt";
 	if(status != EventManagerStatusIdle) {
 		status = EventManagerStatusIdle;
 		[connection cancel];
-		[connection release];
-		connection = nil;
 		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 		[delegate setLoadingText:@""];
 		[reciever eventsLoaded:self.events];
@@ -61,21 +62,25 @@ NSString *LAST_UPDATE_URL = @"http://keynote.se/iphone/events-update-time.txt";
 
 - (void) updateToNewerEvents {
 	[delegate setLoadingText:@"Fetching newer events..."];
-	status = EventManagerStatusChecking;
+	status = EventManagerStatusUpdating;
 	[self makeConnection:EVENTS_URL];
 }
 
-- (void)connection:(NSURLConnection *)whichConnection didReceiveData:(NSData *)data {
+- (void)connection:(NSURLConnection *)whichConnection didReceiveData:(NSData *)newData {
+	[data appendData:newData];
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+	NSLog([[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease]);
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	if(status == EventManagerStatusChecking) {
 		status = EventManagerStatusIdle;
-		[connection release];
 		NSString *string = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
 		
-		newEventsID = [string intValue];
+		int newEventsID = string.intValue;
 		
 		if(newEventsID <= eventsID) {
-			lastFetch = [EventManager dateInFormat:@"%s"].intValue;
+			lastUpdate = [EventManager dateInFormat:@"%s"].intValue;
 			[self updateComplete];
 			return;
 		}
@@ -84,22 +89,23 @@ NSString *LAST_UPDATE_URL = @"http://keynote.se/iphone/events-update-time.txt";
 	}
 	else if(status == EventManagerStatusUpdating) {
 		status = EventManagerStatusIdle;
-		[connection release];
 		[delegate setLoadingText:@"Processing fetched data..."];
-		NSArray *processedData = [self processEventsData:data];
+		NSDictionary *processedData = [self processEventsData:data];
 		
 		if(processedData != nil) {
-			self.events = processedData;
-			lastFetch = [EventManager dateInFormat:@"%s"].intValue;
+			[events release];
+			events = [[processedData objectForKey:@"events"] retain];
+			eventsID = ((NSNumber *)[processedData objectForKey:@"eventsID"]).intValue;
+			lastUpdate = [EventManager dateInFormat:@"%s"].intValue;
+			newEvents = YES;
 			[self updateComplete];
-			return;
 		}
 		else {
 			UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"The events could not be processed"
 															 message:@"The events fetched from the server could not be processed.\nOld events will be used instead." delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil] autorelease];
 			[alert show];
 		}
-	}
+	}	
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
@@ -112,7 +118,7 @@ NSString *LAST_UPDATE_URL = @"http://keynote.se/iphone/events-update-time.txt";
 
 - (int) getLastUpdate {
 	if(status == EventManagerStatusIdle)
-		return lastFetch;
+		return lastUpdate;
 	else
 		return -1;
 }
@@ -121,18 +127,10 @@ NSString *LAST_UPDATE_URL = @"http://keynote.se/iphone/events-update-time.txt";
 	if(![settingsDelegate shouldUpdate])
 		return;
 	
-	if(lastFetch+[settingsDelegate updateInterval] > [EventManager dateInFormat:@"%s"].intValue)
+	if(lastUpdate+[settingsDelegate updateInterval] > [EventManager dateInFormat:@"%s"].intValue)
 		return;
 	
 	[self checkForNewerEvents];
-}
-
-- (id) init {
-	if(self = [super init]){
-		self.events = nil;
-	}
-	
-	return self;
 }
 
 - (void) loadEvents {
@@ -163,6 +161,10 @@ NSString *LAST_UPDATE_URL = @"http://keynote.se/iphone/events-update-time.txt";
 }
 
 - (void) updateComplete {
+	[data release];
+	data = nil;
+	[connection release];
+	connection = nil;
 	[self outputEvents];
 	[delegate setLoadingText:@""];
 	if([delegate respondsToSelector:@selector(updateFinished)])
@@ -200,36 +202,41 @@ NSString *LAST_UPDATE_URL = @"http://keynote.se/iphone/events-update-time.txt";
 	
 	[delegate setLoadingText:@"Loading events from file..."];
 	
-	NSString *pathDefault = [NSString stringWithFormat:@"%@/Library/Caches/events.plist", NSHomeDirectory()];
-	NSDictionary *rootDictCached = [NSDictionary dictionaryWithContentsOfFile:pathDefault];
+	NSString *pathCached = [NSString stringWithFormat:@"%@/Library/Caches/events.plist", NSHomeDirectory()];
+	NSDictionary *rootDictCached = [NSDictionary dictionaryWithContentsOfFile:pathCached];
 	
-	NSString *pathCached = [[NSBundle mainBundle] pathForResource:@"events" ofType:@"plist"];
-	NSDictionary *rootDictDefault = [NSDictionary dictionaryWithContentsOfFile:pathCached];
+	NSString *pathDefault = [[NSBundle mainBundle] pathForResource:@"events" ofType:@"plist"];
+	NSDictionary *rootDictDefault = [NSDictionary dictionaryWithContentsOfFile:pathDefault];
+	
+	newEvents = NO;
 	
 	if(!rootDictCached) {
 		eventsID = ((NSNumber *)[rootDictDefault objectForKey:@"eventsID"]).intValue;
-		lastFetch = 0;
-		self.events = [rootDictDefault objectForKey:@"events"];
+		lastUpdate = 0;
+		[events release];
+		events = [[rootDictDefault objectForKey:@"events"] retain];
 	}
 	else {
 		eventsID = ((NSNumber *)[rootDictDefault objectForKey:@"eventsID"]).intValue;
-		newEventsID = ((NSNumber *)[rootDictCached objectForKey:@"eventsID"]).intValue;
+		int eventsIDCached = ((NSNumber *)[rootDictCached objectForKey:@"eventsID"]).intValue;
 		
-		if(eventsID > newEventsID) {
-			lastFetch = 0;
-			self.events = [rootDictDefault objectForKey:@"events"];
+		[events release];
+		if(eventsID > eventsIDCached) {
+			events = [[rootDictDefault objectForKey:@"events"] retain];
+			newEvents = YES;
 		}
 		else {
-			lastFetch = ((NSNumber *)[rootDictCached objectForKey:@"last_update"]).intValue;
-			self.events = [rootDictCached objectForKey:@"events"];
+			events = [[rootDictCached objectForKey:@"events"] retain];
+			eventsID = eventsIDCached;
 		}
+		lastUpdate = ((NSNumber *)[rootDictCached objectForKey:@"last_update"]).intValue;
 	}
 }
 
-- (NSArray *) processEventsData: (NSData *)data {
+- (NSDictionary *) processEventsData: (NSData *)whichData {
 	NSString *errorDesc = nil;
 	NSPropertyListFormat format;
-	NSDictionary * dict = (NSDictionary*)[NSPropertyListSerialization propertyListFromData:data
+	NSDictionary *dict = (NSDictionary *)[NSPropertyListSerialization propertyListFromData:whichData
 																		  mutabilityOption:NSPropertyListMutableContainersAndLeaves
 																					format:&format
 																		  errorDescription:&errorDesc];
@@ -239,7 +246,7 @@ NSString *LAST_UPDATE_URL = @"http://keynote.se/iphone/events-update-time.txt";
 		return nil;
 	}
 	
-	return [dict objectForKey:@"events"];
+	return dict;
 }
 
 - (void) outputEvents {
@@ -248,16 +255,12 @@ NSString *LAST_UPDATE_URL = @"http://keynote.se/iphone/events-update-time.txt";
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
 	
 	[dict setObject:events forKey:@"events"];
-	[dict setObject:[NSNumber numberWithInt:lastFetch] forKey:@"last_update"];
-	[dict setObject:[NSNumber numberWithInt:(newEventsID != 0 ? newEventsID : eventsID)] forKey:@"eventsID"];
+	[dict setObject:[NSNumber numberWithInt:lastUpdate] forKey:@"last_update"];
+	[dict setObject:[NSNumber numberWithInt:eventsID] forKey:@"eventsID"];
 	
 	[dict writeToFile:filePath atomically:YES];
 	
 	[dict release];
-}
-
-- (BOOL) hasNewEvents {
-	return eventsID != newEventsID && newEventsID != 0;
 }
 
 - (NSArray *)getEvents {
@@ -265,13 +268,6 @@ NSString *LAST_UPDATE_URL = @"http://keynote.se/iphone/events-update-time.txt";
 		return [NSArray arrayWithArray:events];
 	else
 		return nil;
-}
-
-- (int) getRealEventsID {
-	if(newEventsID != 0)
-		return newEventsID;
-	else
-		return eventsID;
 }
 
 - (void) dealloc {

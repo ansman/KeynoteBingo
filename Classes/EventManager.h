@@ -48,25 +48,24 @@ typedef enum {
 	
 	@private
 	EventManagerStatus status;
+	NSMutableData *data;
 	NSURLConnection *connection;
-	int lastFetch;
+	int lastUpdate;
 	int eventsID;
-	int newEventsID;
+	BOOL newEvents;
 }
 
-@property (nonatomic, retain) NSArray *events;
+@property (nonatomic, readonly) NSArray *events;
 @property (nonatomic, assign) id<EventManagerDelegate> delegate;
 @property (nonatomic, assign) id<EventManagerSettingsDelegate> settingsDelegate;
 @property (nonatomic, assign) id<EventManagerReciver> reciever;
 @property (nonatomic, readonly) EventManagerStatus status;
+@property (nonatomic, readonly) int eventsID;
+@property (nonatomic, readonly, getter=hasNewEvents) BOOL newEvents;
+@property (nonatomic, readonly) int lastUpdate;
 
-- (void) outputEvents;
-- (BOOL) hasNewEvents;
-- (void) loadEvents;
-- (int) getRealEventsID;
-- (int) getLastUpdate;
 - (void) cancelUpdate;
-
+- (void) loadEvents;
 + (NSString *) dateInFormat:(NSString*) stringFormat;
 
 
