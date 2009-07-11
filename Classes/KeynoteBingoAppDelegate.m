@@ -188,8 +188,11 @@ int SETTINGS_VIEW = 2;
 	[gameViewController release];
 	[menuViewController release];
 	[settingsViewController release];
+	[gameBoardViewController release];
 	[loadingViewController release];
+	[eventManager release];
     [window release];
+	[transitionManager release];
     [super dealloc];
 }
 

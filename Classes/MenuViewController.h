@@ -20,7 +20,6 @@
 	@private
 	UITextField *numberInput;
 	UILabel *errorLabel;
-	UIBarButtonItem *cancelButton;
 }
 
 @property (nonatomic, assign) id<MenuViewControllerDelegate> delegate;

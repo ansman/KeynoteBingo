@@ -32,11 +32,10 @@
 	
 	UIToolbar *navBar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)] autorelease];
 	
-	[cancelButton release];
-	cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
+	UIBarButtonItem *cancelButton = [[[UIBarButtonItem alloc] initWithTitle:@"Cancel"
 														style:UIBarButtonItemStyleBordered
 														target:self
-														action:@selector(returnToGame)];
+														action:@selector(returnToGame)] autorelease];
 	
 	navBar.items = [NSArray arrayWithObjects:cancelButton, nil];
 	
@@ -114,7 +113,7 @@
 		errorLabel.text = @"Please enter a number between 0 and 2147483646";
 		return;
 	}
-	[numberInput resignFirstResponder];
+	[self closeKeyboard];
 	[self.delegate newGame:[NSNumber numberWithInt:number]];
 }
 
@@ -126,7 +125,6 @@
 - (void)dealloc {
 	[errorLabel release];
 	[numberInput release];
-	[cancelButton release];
     [super dealloc];
 }
 

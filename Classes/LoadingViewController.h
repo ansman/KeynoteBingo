@@ -21,7 +21,6 @@
 	@private
 	UILabel *progressLabel;
 	UIButton *cancelButton;
-	UIImageView *backgroundImageView;
 }
 
 @property (nonatomic, assign) id<LoadingViewControllerDelegate> delegate;

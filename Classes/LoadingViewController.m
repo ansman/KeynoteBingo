@@ -19,14 +19,6 @@
 
 @synthesize delegate;
 
-/*- (id) init {
-	if(self = [super init]) {
-		progressLabel = [[UILabel alloc] initWithFrame:<#(CGRect)frame#>];
-		cancelButton = [[UIButton buttonWithType:UIButtonTypeRoundedRect] retain];
-	}
-	return self;
-}*/
-
 - (void) setLoadingText:(NSString *)loadingText {
 	[progressLabel setText:loadingText];
 }
@@ -36,8 +28,7 @@
 - (void)loadView {
 	self.view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
 	
-	[backgroundImageView release];
-	backgroundImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+	UIImageView *backgroundImageView = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)] autorelease];
 	backgroundImageView.image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Default" ofType:@"png"]];
 	backgroundImageView.userInteractionEnabled = NO;
 	
@@ -87,6 +78,7 @@
 
 - (void)dealloc {
 	[progressLabel release];
+	[cancelButton release];
     [super dealloc];
 }
 

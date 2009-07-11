@@ -34,7 +34,6 @@
 	[containerView release];
 	[newView release];
 	[oldView release];
-	[delegate release];
 	[super dealloc];
 }
 

@@ -286,7 +286,9 @@ NSString *LAST_UPDATE_URL = @"http://ansman.se/keynote_bingo/events-update-time.
 }
 
 - (void) dealloc {
+	[events release];
 	[data release];
+	[connection release];
 	[super dealloc];
 }
 
