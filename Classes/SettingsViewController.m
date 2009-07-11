@@ -27,6 +27,7 @@
 
 - (id) initWithDelegate:(id<SettingsViewControllerDelegate>)withDelegate{
 	if(self = [self init]) {
+		isIphone = [[UIDevice currentDevice].model rangeOfString:@"iPhone"].location != NSNotFound;
 		self.delegate = withDelegate;
 		[self loadCustomView];
 		[self loadSettings];
@@ -60,7 +61,10 @@
 
 - (void) loadSettings {
 	sound = ![[NSUserDefaults standardUserDefaults] boolForKey:@"sound"];
-	vibrate = ![[NSUserDefaults standardUserDefaults] boolForKey:@"vibrate"];
+	if(isIphone)
+		vibrate = ![[NSUserDefaults standardUserDefaults] boolForKey:@"vibrate"];
+	else
+		vibrate = NO;
 	automaticUpdate = ![[NSUserDefaults standardUserDefaults] boolForKey:@"automaticUpdate"];
 	updateInterval = [[NSUserDefaults standardUserDefaults] integerForKey:@"updateInterval"];
 	soundSwitch.on = sound;
@@ -337,7 +341,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if(section == 0)
-		return 2;
+		return isIphone ? 2 : 1;
 	else
 		return automaticUpdate ? 5 : 4;
 }

@@ -38,6 +38,7 @@
 	UISwitch *vibrateSwitch;
 	UISwitch *updateSwitch;
 	UIPickerView *updatePicker;
+	BOOL isIphone;
 }
 
 @property (nonatomic, readonly, getter=shouldUpdate) BOOL automaticUpdate;

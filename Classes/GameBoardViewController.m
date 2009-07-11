@@ -42,7 +42,7 @@
 			[button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
 			[array addObject:button];
 		}
-		buttons = [[NSArray alloc] initWithArray:array];
+		buttons = [[NSArray alloc] initWithArray:array];		
 		[self loadSettings];
 	}
 	return self;

@@ -3,7 +3,7 @@
 //  KeynoteBingo
 //
 //  Created by Nicklas Ansman on 14-6-2009.
-//  Copyright __MyCompanyName__ 2009. All rights reserved.
+//  Copyright Nicklas Ansman 2009. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
