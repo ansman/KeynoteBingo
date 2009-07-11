@@ -22,7 +22,6 @@
 @synthesize delegate;
 
 - (void) viewWillAppear: (BOOL) animated {
-	cancelButton.enabled = [delegate gameHasStarted];
 	errorLabel.text = @"";
 }
 

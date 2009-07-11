@@ -147,15 +147,16 @@ int SETTINGS_VIEW = 2;
 }
 
 - (void) returnToGame {
-	if (gameViewController.boardNumber != nil && [menuViewController.view superview] != nil) {
+	if ([menuViewController.view superview])
 		[self performTransition:menuViewController.view newView:gameViewController.view transitionType:TransitionTypeReveal];
-	}
-	else
+	else if([[settingsViewController getView] superview])
 		[self performTransition:[settingsViewController getView] newView:gameViewController.view transitionType:TransitionTypeFlipRight];
+	else
+		[window addSubview:gameViewController.view];
 }
 
 - (void) showSettings {
-	if([gameViewController.view superview] != nil)
+	if([gameViewController.view superview])
 		[self performTransition:gameViewController.view newView:[settingsViewController getView] transitionType:TransitionTypeFlipLeft];
 }
 

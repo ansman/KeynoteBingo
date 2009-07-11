@@ -24,6 +24,7 @@
 		bingoLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 416, 280, 40)];
 		
 		boardNumberLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 52, 280, 30)];
+		boardNumberLabel.text = @"No number selected";
 		
 		gameBoardView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 95, 320, 320)];
 		
@@ -60,6 +61,8 @@
 			[boardNumber release];
 			boardNumber = nil;
 		}
+		else
+			boardNumberLabel.text = [NSString stringWithFormat:@"Board #%@", boardNumber];
 		
 		CGPoint point = CGPointMake([[NSUserDefaults standardUserDefaults] floatForKey:@"contentOffsetX"], [[NSUserDefaults standardUserDefaults] floatForKey:@"contentOffsetY"]);
 			
@@ -88,6 +91,7 @@
 	[boardNumber autorelease];
 	boardNumber = [newBoardNumber retain];
 	[[NSUserDefaults standardUserDefaults] setInteger:self.boardNumber.intValue forKey:@"boardNumber"];
+	boardNumberLabel.text = [NSString stringWithFormat:@"Board #%@", boardNumber];
 	[self removeBingo];
 	[gameBoard newGame];
 }
@@ -110,11 +114,6 @@
 
 - (UIView *) viewForZoomingInScrollView:(UIScrollView *) scrollView {
 	return gameBoard.view;
-}
-
-- (void) viewWillAppear: (BOOL) animated {	
-	boardNumberLabel.text = [NSString stringWithFormat:@"Board #%@", boardNumber];
-	[self.gameBoard viewWillAppear:animated];
 }
 
 - (void) loadView {

@@ -140,30 +140,39 @@
 			[self.view addSubview:[buttons objectAtIndex:i*5+j]];
 }
 
-- (void) placeEvents {
-	int numberOfEvents = [events count];
-	
-	BOOL pickedNumbers[numberOfEvents];
-	
-	for (int i = 0; i < numberOfEvents; i++)
-		pickedNumbers[i] = NO;
-	
-	int number;
-	
-	srand([container getBoardNumber].unsignedIntValue);
-	
-	for (KeynoteButton *button in buttons) {
-		do {
-			number = rand() % numberOfEvents;
-		} while (pickedNumbers[number]);
-		pickedNumbers[number] = YES;
-		[button setTitle:[[events objectAtIndex:number] autorelease] forState:UIControlStateNormal];
+- (void) placeEvents {	
+	if([container getBoardNumber]) {
+		int numberOfEvents = [events count];
+		
+		BOOL pickedNumbers[numberOfEvents];
+		
+		for (int i = 0; i < numberOfEvents; i++)
+			pickedNumbers[i] = NO;
+		
+		int number;
+		
+		srand([container getBoardNumber].unsignedIntValue);
+		
+		for (KeynoteButton *button in buttons) {
+			do {
+				number = rand() % numberOfEvents;
+			} while (pickedNumbers[number]);
+			pickedNumbers[number] = YES;
+			[button setTitle:[events objectAtIndex:number] forState:UIControlStateNormal];
+		}
+	}
+	else {
+		for (KeynoteButton *button in buttons) {
+			button.enabled = NO;
+			[button setTitle:@"No number selected" forState:UIControlStateNormal];
+		}
 	}
 }
 
 - (void) resetBoard {
 	for(KeynoteButton *button in buttons){
 		button.selected = NO;
+		button.enabled = YES;
 		[[NSUserDefaults standardUserDefaults] setBool:NO forKey:[NSString stringWithFormat:@"button%iSelected", button.tag]];
 	}
 	[container removeBingo];
