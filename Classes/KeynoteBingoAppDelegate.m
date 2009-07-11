@@ -151,8 +151,6 @@ int SETTINGS_VIEW = 2;
 		[self performTransition:menuViewController.view newView:gameViewController.view transitionType:TransitionTypeReveal];
 	else if([[settingsViewController getView] superview])
 		[self performTransition:[settingsViewController getView] newView:gameViewController.view transitionType:TransitionTypeFlipRight];
-	else
-		[window addSubview:gameViewController.view];
 }
 
 - (void) showSettings {
@@ -161,17 +159,13 @@ int SETTINGS_VIEW = 2;
 }
 
 - (void) pickNewGame {
-	if ([gameViewController.view superview] != nil)
+	if ([gameViewController.view superview])
 		[self performTransition:gameViewController.view newView:menuViewController.view transitionType:TransitionTypeMoveOver];
 }
 
 - (void) newGame:(NSNumber *)boardNumber {			
 	[gameViewController newGame:boardNumber];
 	[self performTransition:menuViewController.view newView:gameViewController.view transitionType:TransitionTypeReveal];
-}
-
-- (BOOL) gameHasStarted {
-	return [gameViewController gameHasStarted];
 }
 
 - (int) eventsID {

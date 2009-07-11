@@ -11,7 +11,6 @@
 @protocol MenuViewControllerDelegate <NSObject>
 - (void) newGame:(NSNumber *)boardNumber;
 - (void) returnToGame;
-- (BOOL) gameHasStarted;
 @end
 
 

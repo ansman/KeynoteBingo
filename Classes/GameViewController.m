@@ -83,10 +83,6 @@
 	[[NSUserDefaults standardUserDefaults] setFloat:gameBoardView.contentOffset.y forKey:@"contentOffsetY"];
 }
 
-- (BOOL) gameHasStarted {
-	return boardNumber != nil;
-}
-
 - (void) newGame: (NSNumber *)newBoardNumber {
 	[boardNumber autorelease];
 	boardNumber = [newBoardNumber retain];

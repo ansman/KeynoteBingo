@@ -46,7 +46,6 @@
 @property (nonatomic, readonly) NSNumber *boardNumber;
 
 - (void) newGame: (NSNumber *) newBoardNumber;
-- (BOOL) gameHasStarted;
 
 - (void) saveSettings;
 
