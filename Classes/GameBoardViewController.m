@@ -172,7 +172,7 @@
 - (void) setEventManager:(EventManager *)manager {
 	[eventManager autorelease];
 	eventManager = [manager retain];
-	eventManager.reciever = self;
+	eventManager.receiver = self;
 }
 
 - (void)dealloc {

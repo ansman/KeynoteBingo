@@ -23,7 +23,7 @@
 
 @implementation EventManager
 
-@synthesize events, delegate, settingsDelegate, reciever, status, lastUpdate, newEvents, eventsID;
+@synthesize events, delegate, settingsDelegate, receiver, status, lastUpdate, newEvents, eventsID;
 
 /*NSString *EVENTS_URL = @"http://keynote.se/iphone/events.plist";
 NSString *LAST_UPDATE_URL = @"http://keynote.se/iphone/events-update-time.txt";*/
@@ -181,7 +181,7 @@ NSString *LAST_UPDATE_URL = @"http://ansman.se/keynote_bingo/events-update-time.
 	[delegate setLoadingText:@""];
 	if([delegate respondsToSelector:@selector(updateFinished)])
 		[delegate performSelector:@selector(updateFinished)];
-	[reciever eventsLoaded];
+	[receiver eventsLoaded];
 }
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {

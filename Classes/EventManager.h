@@ -43,7 +43,7 @@ typedef enum {
 	NSArray *events;
 	id<EventManagerSettingsDelegate> settingsDelegate;
 	id<EventManagerDelegate> delegate;
-	id<EventManagerReciver> reciever;
+	id<EventManagerReciver> receiver;
 	
 	
 	@private
@@ -58,7 +58,7 @@ typedef enum {
 @property (nonatomic, readonly) NSArray *events;
 @property (nonatomic, assign) id<EventManagerDelegate> delegate;
 @property (nonatomic, assign) id<EventManagerSettingsDelegate> settingsDelegate;
-@property (nonatomic, assign) id<EventManagerReciver> reciever;
+@property (nonatomic, assign) id<EventManagerReciver> receiver;
 @property (nonatomic, readonly) EventManagerStatus status;
 @property (nonatomic, readonly) int eventsID;
 @property (nonatomic, readonly, getter=hasNewEvents) BOOL newEvents;
