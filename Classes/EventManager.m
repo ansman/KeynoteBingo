@@ -16,8 +16,6 @@
 - (NSDictionary *) processEventsData: (NSData *)data;
 - (void) updateComplete;
 - (void) outputEvents;
-- (void) loadEventsFromInternet;
-- (void) loadEventsFromFile;
 
 @end
 
@@ -39,6 +37,10 @@ NSString *LAST_UPDATE_URL = @"http://ansman.se/keynote_bingo/events-update-time.
 	return self;
 }
 
+/**
+ * Creates a connection to the specified URL
+ * and starts the connection.
+ */
 - (void) makeConnection:(NSString *)urlString {
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 	
@@ -50,6 +52,11 @@ NSString *LAST_UPDATE_URL = @"http://ansman.se/keynote_bingo/events-update-time.
 	[connection start];
 }
 
+/**
+ * Cancels an ongoing update.
+ * This method does nothing if called when
+ * status == EventManagerStatusIdle
+ */
 - (void) cancelUpdate {
 	if(status != EventManagerStatusIdle) {
 		status = EventManagerStatusIdle;
@@ -64,26 +71,41 @@ NSString *LAST_UPDATE_URL = @"http://ansman.se/keynote_bingo/events-update-time.
 	}
 }
 
+/**
+ * Checks the server for newer events.
+ */
 - (void) checkForNewerEvents {
 	[delegate setLoadingText:@"Checking for newer events..."];
 	status = EventManagerStatusChecking;
 	[self makeConnection:LAST_UPDATE_URL];
 }
 
+/**
+ * Fetches events from the server.
+ */
 - (void) updateToNewerEvents {
 	[delegate setLoadingText:@"Fetching newer events..."];
 	status = EventManagerStatusUpdating;
 	[self makeConnection:EVENTS_URL];
 }
 
+/**
+ * Appends data to an existing data object for
+ * processing later on.
+ */
 - (void)connection:(NSURLConnection *)whichConnection didReceiveData:(NSData *)newData {
 	[data appendData:newData];
 }
 
+/**
+ * Called on when the connection finished loading.
+ * The status is then checked and the appropriate action
+ * is taken. 
+ */
 - (void)connectionDidFinishLoading:(NSURLConnection *)notUsed {
 	[connection release];
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-	if(status == EventManagerStatusChecking) {
+	if(status == EventManagerStatusChecking) { // Checking for newer events.
 		status = EventManagerStatusIdle;
 		NSString *string = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
 		
@@ -92,6 +114,7 @@ NSString *LAST_UPDATE_URL = @"http://ansman.se/keynote_bingo/events-update-time.
 		[data release];
 		data = nil;
 		
+		// The events on the server are obviously not newer.
 		if(newEventsID <= eventsID) {
 			lastUpdate = [EventManager dateInFormat:@"%s"].intValue;
 			[self updateComplete];
@@ -99,13 +122,14 @@ NSString *LAST_UPDATE_URL = @"http://ansman.se/keynote_bingo/events-update-time.
 		}
 		[self updateToNewerEvents];
 	}
-	else if(status == EventManagerStatusUpdating) {
+	else if(status == EventManagerStatusUpdating) { // Fetching events.
 		status = EventManagerStatusIdle;
 		[delegate setLoadingText:@"Processing fetched data..."];
 		NSDictionary *processedData = [self processEventsData:data];
 		[data release];
 		data = nil;
 		
+		// If the dictionary is nil than something was wrong.
 		if(processedData != nil) {
 			[events autorelease];
 			events = [[processedData objectForKey:@"events"] retain];
@@ -122,6 +146,10 @@ NSString *LAST_UPDATE_URL = @"http://ansman.se/keynote_bingo/events-update-time.
 	}	
 }
 
+/**
+ * When for some reason the connection failed this method is called.
+ * An alert box is shown to the user when this happens.
+ */
 - (void)connection:(NSURLConnection *)notUsed didFailWithError:(NSError *)error {
 	status = EventManagerStatusIdle;
 	[connection release];
@@ -132,6 +160,10 @@ NSString *LAST_UPDATE_URL = @"http://ansman.se/keynote_bingo/events-update-time.
 	[alert show];
 }
 
+/**
+ * Returns the unix timestamp of the last update.
+ * Returns -1 if an update is ongoing.
+ */
 - (int) lastUpdate {
 	if(status == EventManagerStatusIdle)
 		return lastUpdate;
@@ -139,43 +171,57 @@ NSString *LAST_UPDATE_URL = @"http://ansman.se/keynote_bingo/events-update-time.
 		return -1;
 }
 
-- (void) loadEventsFromInternet {
-	if(![settingsDelegate shouldUpdate])
-		return;
-	
-	if(lastUpdate+[settingsDelegate updateInterval] > [EventManager dateInFormat:@"%s"].intValue)
-		return;
+/**
+ * Loads events from a server.
+ * If the argument is YES then the last
+ * update checks will be skipped.
+ */
+- (void) loadEventsFromInternet:(BOOL) forced {
+	if(!forced) {
+		if(![settingsDelegate shouldUpdate])
+			return;
+		
+		if(lastUpdate+[settingsDelegate updateInterval] > [EventManager dateInFormat:@"%s"].intValue)
+			return;
+	}
 	
 	[self checkForNewerEvents];
 }
 
+/**
+ * Should be called when the event manager has been created
+ * to load the events, both from a file and from a server.
+ */
 - (void) loadEvents {
 	NSString *path = [NSString stringWithFormat:@"%@/Library/Caches/events.plist", NSHomeDirectory()];
 	NSFileManager *manager = [NSFileManager defaultManager];
 	
-	if(![manager fileExistsAtPath:path]) {
+	if(![manager fileExistsAtPath:path]) { // First time starting the app.
 		UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Automatic Updates"
 														message:@"This application uses an automatic update feature which requires an internet connect to function.\nDo you wish to enable this feature (this can be changed later in the settings menu later)?" 
 														delegate:self 
-														cancelButtonTitle:@"Yes"
+														cancelButtonTitle:@"No"
 														otherButtonTitles:nil] autorelease];
-		alert.cancelButtonIndex = 1;
+		alert.cancelButtonIndex = 0;
 		alert.tag = 1337;
-		[alert addButtonWithTitle:@"No"];
+		[alert addButtonWithTitle:@"Yes"];
 		[alert show];
 		
 	}
-	else {
+	else { // Not the first time.
 		if([delegate respondsToSelector:@selector(updateStarted)])
 			[delegate performSelector:@selector(updateStarted)];
 		[self loadEventsFromFile];
-		[self loadEventsFromInternet];
+		[self loadEventsFromInternet:NO];
 		
 		if(status == EventManagerStatusIdle)
 			[self updateComplete];
 	}
 }
 
+/**
+ * Called on when all the updates has been completed.
+ */
 - (void) updateComplete {
 	[self outputEvents];
 	[delegate setLoadingText:@""];
@@ -184,19 +230,26 @@ NSString *LAST_UPDATE_URL = @"http://ansman.se/keynote_bingo/events-update-time.
 	[receiver eventsLoaded];
 }
 
+/**
+ * Called on when the user closes a alert.
+ */
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-	if(alertView.tag == 1337){
+	if(alertView.tag == 1337){ // The first load alert
 		NSString *path = [NSString stringWithFormat:@"%@/Library/Caches/events.plist", NSHomeDirectory()];
 		NSFileManager *manager = [NSFileManager defaultManager];
 		[manager createFileAtPath:path contents:nil attributes:nil];
-		if(buttonIndex == 1)
+		if(buttonIndex == 0)
 			[settingsDelegate setAutomaticUpdates:NO];
 		[self loadEvents];
 	}
-	else
+	else // Events could not be loaded/not processed alert
 		[self updateComplete];
 }
 
+/**
+ * Returns a date in the specified format.
+ * The formats are the same as for strftime()
+ */
 +(NSString *) dateInFormat:(NSString*) stringFormat {
 	char buffer[80];
 	const char *format = [stringFormat UTF8String];
@@ -208,6 +261,15 @@ NSString *LAST_UPDATE_URL = @"http://ansman.se/keynote_bingo/events-update-time.
 	return [NSString  stringWithCString:buffer encoding:NSUTF8StringEncoding];
 }
 
+/**
+ * Loads the events from a file.
+ * There are 2 files:
+ * 1. App bundle/Resources/events.plist
+ * 2. User Home Dir/Library/Caches/events.plist
+ *
+ * The first is included in the app and the second
+ * stores the events fetched from the server.
+ */
 - (void) loadEventsFromFile {
 	if(events)
 		return;
@@ -222,7 +284,7 @@ NSString *LAST_UPDATE_URL = @"http://ansman.se/keynote_bingo/events-update-time.
 	
 	newEvents = NO;
 	
-	if(!rootDictCached) {
+	if(!rootDictCached) { // No cached file, use default.
 		eventsID = ((NSNumber *)[rootDictDefault objectForKey:@"eventsID"]).intValue;
 		lastUpdate = 0;
 		[events autorelease];
@@ -232,12 +294,12 @@ NSString *LAST_UPDATE_URL = @"http://ansman.se/keynote_bingo/events-update-time.
 		eventsID = ((NSNumber *)[rootDictDefault objectForKey:@"eventsID"]).intValue;
 		int eventsIDCached = ((NSNumber *)[rootDictCached objectForKey:@"eventsID"]).intValue;
 		
-		if(eventsID > eventsIDCached) {
+		if(eventsID > eventsIDCached) { // Default events are newer than cached, use default.
 			[events autorelease];
 			events = [[rootDictDefault objectForKey:@"events"] retain];
 			newEvents = YES;
 		}
-		else {
+		else { // Cached are newer (most common), use cached.
 			[events autorelease];
 			events = [[rootDictCached objectForKey:@"events"] retain];
 			eventsID = eventsIDCached;
@@ -246,6 +308,10 @@ NSString *LAST_UPDATE_URL = @"http://ansman.se/keynote_bingo/events-update-time.
 	}
 }
 
+/**
+ * Transforms a NSData object into an NSDictionary
+ * If the data could not be transformed nil is returned.
+ */
 - (NSDictionary *) processEventsData: (NSData *)whichData {
 	NSString *errorDesc = nil;
 	NSPropertyListFormat format;
@@ -262,6 +328,13 @@ NSString *LAST_UPDATE_URL = @"http://ansman.se/keynote_bingo/events-update-time.
 	return dict;
 }
 
+/**
+ * Writes the events to:
+ * User home dir/Caches/Library/events.plist
+ *
+ * The file is written atomically so that no
+ * corruption can occur.
+ */
 - (void) outputEvents {
 	if(!newEvents)
 		return;
@@ -278,9 +351,13 @@ NSString *LAST_UPDATE_URL = @"http://ansman.se/keynote_bingo/events-update-time.
 	[dict release];
 }
 
+/**
+ * Returns the events.
+ * Returns nil if they are being updated.
+ */
 - (NSArray *)events {
 	if(status == EventManagerStatusIdle)
-		return [NSArray arrayWithArray:events];
+		return events;
 	else
 		return nil;
 }

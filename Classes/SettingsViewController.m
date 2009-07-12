@@ -195,15 +195,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	if(indexPath.row == 2 && indexPath.section == 1) {
-		if([delegate lastUpdate] != -1) {
-			int oldValue1 = updateInterval;
-			BOOL oldValue2 = automaticUpdate;
-			updateInterval = 0;
-			automaticUpdate = YES;
-			[delegate loadEvents];
-			updateInterval = oldValue1;
-			automaticUpdate = oldValue2;
-		}
+		if([delegate lastUpdate] != -1) 
+			[delegate updateEvents:YES];
 		else 
 			[delegate cancelUpdate];
 		[self updateView];

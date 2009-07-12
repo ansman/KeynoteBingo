@@ -14,7 +14,7 @@
 @protocol SettingsViewControllerDelegate <NSObject>
 
 - (void) returnToGame;
-- (void) loadEvents;
+- (void) updateEvents:(BOOL)forced;
 - (void) cancelUpdate;
 - (int) eventsID;
 - (int) lastUpdate;

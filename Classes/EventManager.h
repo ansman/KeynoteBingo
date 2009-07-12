@@ -66,6 +66,8 @@ typedef enum {
 
 - (void) cancelUpdate;
 - (void) loadEvents;
+- (void) loadEventsFromInternet:(BOOL) forced;
+- (void) loadEventsFromFile;
 + (NSString *) dateInFormat:(NSString*) stringFormat;
 
 
