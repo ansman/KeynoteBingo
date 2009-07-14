@@ -52,6 +52,7 @@ typedef enum {
 	NSURLConnection *connection;
 	int lastUpdate;
 	int eventsID;
+	int serverEventsID;
 	BOOL newEvents;
 }
 

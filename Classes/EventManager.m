@@ -23,11 +23,8 @@
 
 @synthesize events, delegate, settingsDelegate, receiver, status, lastUpdate, newEvents, eventsID;
 
-/*NSString *EVENTS_URL = @"http://keynote.se/iphone/events.plist";
-NSString *LAST_UPDATE_URL = @"http://keynote.se/iphone/events-update-time.txt";*/
-
-NSString *EVENTS_URL = @"http://ansman.se/keynote_bingo/events.plist";
-NSString *LAST_UPDATE_URL = @"http://ansman.se/keynote_bingo/events-update-time.txt";
+NSString *EVENTS_URL = @"http://keynote.se/iphone/events.plist";
+NSString *LAST_UPDATE_URL = @"http://keynote.se/iphone/events-update-time.txt";
 
 - (id) init {
 	if(self = [super init]) {
@@ -120,6 +117,8 @@ NSString *LAST_UPDATE_URL = @"http://ansman.se/keynote_bingo/events-update-time.
 			[self updateComplete];
 			return;
 		}
+		
+		serverEventsID = newEventsID;
 		[self updateToNewerEvents];
 	}
 	else if(status == EventManagerStatusUpdating) { // Fetching events.
@@ -133,7 +132,8 @@ NSString *LAST_UPDATE_URL = @"http://ansman.se/keynote_bingo/events-update-time.
 		if(processedData != nil) {
 			[events autorelease];
 			events = [[processedData objectForKey:@"events"] retain];
-			eventsID = ((NSNumber *)[processedData objectForKey:@"eventsID"]).intValue;
+			eventsID = serverEventsID;
+			serverEventsID = 0;
 			lastUpdate = [EventManager dateInFormat:@"%s"].intValue;
 			newEvents = YES;
 			[self updateComplete];
@@ -154,6 +154,7 @@ NSString *LAST_UPDATE_URL = @"http://ansman.se/keynote_bingo/events-update-time.
 	status = EventManagerStatusIdle;
 	[connection release];
 	connection = nil;
+	serverEventsID = 0;
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"The events could not be loaded"
 													 message:@"The events could not be loaded from the server.\nPlease check your internet connection.\nOld events will be used instead." delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil] autorelease];
