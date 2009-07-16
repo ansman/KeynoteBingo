@@ -37,6 +37,7 @@
 	UILabel *boardNumberLabel;
 	NSNumber *boardNumber;
 	SystemSoundID audioPlayerID;
+	UIImageView *bingoImage;
 }
 
 @property (nonatomic, assign) id<GameViewControllerDelegate> delegate;
@@ -46,7 +47,7 @@
 @property (nonatomic, readonly) NSNumber *boardNumber;
 
 - (void) newGame: (NSNumber *) newBoardNumber;
-
+- (void) animateBingo;
 - (void) saveSettings;
 
 @end

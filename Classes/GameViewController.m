@@ -37,6 +37,9 @@
 		CFURLRef soundFileURLRef = CFBundleCopyResourceURL(mainBundle, CFSTR("bingo"), CFSTR("wav"), NULL);
 		AudioServicesCreateSystemSoundID(soundFileURLRef, &audioPlayerID);
 		
+		bingoImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+		bingoImage.image = [UIImage imageNamed:@"bingo.png"];
+		
 		[self loadSettings];
 	}
 	
@@ -102,6 +105,36 @@
 	if([settingsDelegate shouldVibrate])
 		AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
 	[self bingoSilent];
+	[self animateBingo];
+}
+
+- (void) animateBingo {
+	bingoImage.frame = CGRectMake(160, 274, 0, 0);
+	bingoImage.alpha = 2.5;
+	self.view.userInteractionEnabled = NO;
+	
+	CGRect rect = bingoImage.frame;
+	rect.size.width = 317;
+	rect.size.height = 229;
+	rect.origin.x = 3;
+	rect.origin.y = 156;
+	
+	[self.view addSubview:bingoImage];
+	[self.view bringSubviewToFront:bingoImage];
+	
+	[UIView beginAnimations:nil context:nil];
+	[UIView setAnimationCurve:UIViewAnimationCurveLinear];
+	[UIView setAnimationDuration:1];
+	[UIView setAnimationDelegate:self];
+	bingoImage.frame = rect;
+	bingoImage.alpha = 0;
+	[UIView commitAnimations];
+	
+}
+
+- (void)animationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
+	[bingoImage removeFromSuperview];
+	self.view.userInteractionEnabled = YES;
 }
 
 - (void) removeBingo {
@@ -170,6 +203,7 @@
 
 - (void)dealloc {
 	[gameBoard release];
+	[bingoImage release];
 	[gameBoardView release];
 	[bingoLabel release];
 	[boardNumberLabel release];

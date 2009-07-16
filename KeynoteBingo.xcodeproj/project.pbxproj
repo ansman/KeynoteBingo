@@ -12,17 +12,17 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		352A6DFB0FFBE51300D81DEB /* LoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 352A6DFA0FFBE51300D81DEB /* LoadingViewController.m */; };
-		352A6E070FFBE66D00D81DEB /* bingoBig.png in Resources */ = {isa = PBXBuildFile; fileRef = 352A6E060FFBE66D00D81DEB /* bingoBig.png */; };
 		3546913D0FFD58AB003423CF /* events.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3546913C0FFD58AB003423CF /* events.plist */; };
 		354691610FFD59D8003423CF /* EventManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 354691600FFD59D8003423CF /* EventManager.m */; };
 		354691AE0FFD5B62003423CF /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 354691AD0FFD5B62003423CF /* AudioToolbox.framework */; };
 		35481BC9100F8F1A006EA24C /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 35481BC8100F8F1A006EA24C /* background.png */; };
+		35481BD8100F98ED006EA24C /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 35481BD7100F98ED006EA24C /* Icon.png */; };
+		35481BDA100F990C006EA24C /* bingo.png in Resources */ = {isa = PBXBuildFile; fileRef = 35481BD9100F990C006EA24C /* bingo.png */; };
 		3549E35E0FE847EB00D69649 /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3549E35D0FE847EB00D69649 /* button.png */; };
 		35718D090FFBB37C00666D9B /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35718D070FFBB37C00666D9B /* SettingsViewController.m */; };
 		35725DE70FFA4B9100E7DE5F /* bingo.wav in Resources */ = {isa = PBXBuildFile; fileRef = 35725DE60FFA4B9100E7DE5F /* bingo.wav */; };
 		3584861310024FE6000A3792 /* TransitionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3584861210024FE6000A3792 /* TransitionManager.m */; };
 		358488A310028FCD000A3792 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 358488A210028FCD000A3792 /* Default.png */; };
-		35884EA20FE7262000BAD10F /* Bingo.png in Resources */ = {isa = PBXBuildFile; fileRef = 35884E9A0FE7262000BAD10F /* Bingo.png */; };
 		35884EA30FE7262000BAD10F /* buttonSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 35884E9B0FE7262000BAD10F /* buttonSelected.png */; };
 		3588C58A0FE541E3008B2C66 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3588C5890FE541E3008B2C66 /* GameViewController.m */; };
 		3588C58D0FE541F2008B2C66 /* GameBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3588C58C0FE541F2008B2C66 /* GameBoardViewController.m */; };
@@ -41,12 +41,13 @@
 		32CA4F630368D1EE00C91783 /* KeynoteBingo_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeynoteBingo_Prefix.pch; sourceTree = "<group>"; };
 		352A6DF90FFBE51300D81DEB /* LoadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingViewController.h; sourceTree = "<group>"; };
 		352A6DFA0FFBE51300D81DEB /* LoadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingViewController.m; sourceTree = "<group>"; };
-		352A6E060FFBE66D00D81DEB /* bingoBig.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bingoBig.png; sourceTree = "<group>"; };
 		3546913C0FFD58AB003423CF /* events.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = events.plist; sourceTree = "<group>"; };
 		3546915F0FFD59D8003423CF /* EventManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventManager.h; sourceTree = "<group>"; };
 		354691600FFD59D8003423CF /* EventManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventManager.m; sourceTree = "<group>"; };
 		354691AD0FFD5B62003423CF /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		35481BC8100F8F1A006EA24C /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		35481BD7100F98ED006EA24C /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		35481BD9100F990C006EA24C /* bingo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bingo.png; sourceTree = "<group>"; };
 		3549E35D0FE847EB00D69649 /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
 		35718D070FFBB37C00666D9B /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		35718D080FFBB37C00666D9B /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
@@ -54,7 +55,6 @@
 		3584861110024FE6000A3792 /* TransitionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransitionManager.h; sourceTree = "<group>"; };
 		3584861210024FE6000A3792 /* TransitionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransitionManager.m; sourceTree = "<group>"; };
 		358488A210028FCD000A3792 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		35884E9A0FE7262000BAD10F /* Bingo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Bingo.png; sourceTree = "<group>"; };
 		35884E9B0FE7262000BAD10F /* buttonSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonSelected.png; sourceTree = "<group>"; };
 		3588C5880FE541E3008B2C66 /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
 		3588C5890FE541E3008B2C66 /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
@@ -149,16 +149,16 @@
 		35884E710FE7254B00BAD10F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				35481BD7100F98ED006EA24C /* Icon.png */,
 				35481BC8100F8F1A006EA24C /* background.png */,
 				358488A210028FCD000A3792 /* Default.png */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				3546913C0FFD58AB003423CF /* events.plist */,
+				35481BD9100F990C006EA24C /* bingo.png */,
 				3597149B0FFACDE20065CCB3 /* buttonOverlay.png */,
 				35725DE60FFA4B9100E7DE5F /* bingo.wav */,
 				3549E35D0FE847EB00D69649 /* button.png */,
 				35884E9B0FE7262000BAD10F /* buttonSelected.png */,
-				352A6E060FFBE66D00D81DEB /* bingoBig.png */,
-				35884E9A0FE7262000BAD10F /* Bingo.png */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -205,15 +205,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				35884EA20FE7262000BAD10F /* Bingo.png in Resources */,
 				35884EA30FE7262000BAD10F /* buttonSelected.png in Resources */,
 				3549E35E0FE847EB00D69649 /* button.png in Resources */,
 				35725DE70FFA4B9100E7DE5F /* bingo.wav in Resources */,
 				3597149C0FFACDE20065CCB3 /* buttonOverlay.png in Resources */,
-				352A6E070FFBE66D00D81DEB /* bingoBig.png in Resources */,
 				3546913D0FFD58AB003423CF /* events.plist in Resources */,
 				358488A310028FCD000A3792 /* Default.png in Resources */,
 				35481BC9100F8F1A006EA24C /* background.png in Resources */,
+				35481BD8100F98ED006EA24C /* Icon.png in Resources */,
+				35481BDA100F990C006EA24C /* bingo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

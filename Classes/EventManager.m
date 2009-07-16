@@ -305,7 +305,7 @@ NSString *LAST_UPDATE_URL = @"http://keynote.se/iphone/events-update-time.txt";
 			events = [[rootDictCached objectForKey:@"events"] retain];
 			eventsID = eventsIDCached;
 		}
-		lastUpdate = ((NSNumber *)[rootDictCached objectForKey:@"last_update"]).intValue;
+		lastUpdate = ((NSNumber *)[rootDictCached objectForKey:@"lastUpdate"]).intValue;
 	}
 }
 
@@ -337,15 +337,15 @@ NSString *LAST_UPDATE_URL = @"http://keynote.se/iphone/events-update-time.txt";
  * corruption can occur.
  */
 - (void) outputEvents {
-	if(!newEvents)
-		return;
-	[delegate setLoadingText:@"Writing events to file..."];
+
 	NSString *filePath = [NSString stringWithFormat:@"%@/Library/Caches/events.plist", NSHomeDirectory()];
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
+		
+	[delegate setLoadingText:@"Writing events to file..."];
 	
 	[dict setObject:events forKey:@"events"];
-	[dict setObject:[NSNumber numberWithInt:lastUpdate] forKey:@"last_update"];
 	[dict setObject:[NSNumber numberWithInt:eventsID] forKey:@"eventsID"];
+	[dict setObject:[NSNumber numberWithInt:lastUpdate] forKey:@"lastUpdate"];
 	
 	[dict writeToFile:filePath atomically:YES];
 	
