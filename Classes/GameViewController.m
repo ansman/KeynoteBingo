@@ -114,7 +114,11 @@
 
 - (void) loadView {
 	self.view = [[UIView alloc] initWithFrame:CGRectMake(0, 19, 320, 461)];
-	self.view.backgroundColor = [UIColor whiteColor];
+	
+	UIImageView *background = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 461)];
+	background.image = [UIImage imageNamed:@"background.png"];
+	[self.view addSubview:background];
+	[background release];
 	
 	gameBoardView.maximumZoomScale = 1;
 	gameBoardView.minimumZoomScale = 0.588;
@@ -127,11 +131,15 @@
 	[self.view addSubview:gameBoardView];
 	
 	bingoLabel.textAlignment = UITextAlignmentCenter;
+	bingoLabel.textColor = [UIColor whiteColor];
+	bingoLabel.backgroundColor = [UIColor clearColor];
 	bingoLabel.font = [UIFont boldSystemFontOfSize:24];
 	[self.view addSubview:bingoLabel];
 	
 	boardNumberLabel.textAlignment = UITextAlignmentCenter;
 	boardNumberLabel.font = [UIFont boldSystemFontOfSize:24];
+	boardNumberLabel.textColor = [UIColor whiteColor];
+	boardNumberLabel.backgroundColor = [UIColor clearColor];
 	[self.view addSubview:boardNumberLabel];
 	
 	UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];

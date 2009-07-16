@@ -16,6 +16,7 @@
 		3546913D0FFD58AB003423CF /* events.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3546913C0FFD58AB003423CF /* events.plist */; };
 		354691610FFD59D8003423CF /* EventManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 354691600FFD59D8003423CF /* EventManager.m */; };
 		354691AE0FFD5B62003423CF /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 354691AD0FFD5B62003423CF /* AudioToolbox.framework */; };
+		35481BC9100F8F1A006EA24C /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 35481BC8100F8F1A006EA24C /* background.png */; };
 		3549E35E0FE847EB00D69649 /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3549E35D0FE847EB00D69649 /* button.png */; };
 		35718D090FFBB37C00666D9B /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35718D070FFBB37C00666D9B /* SettingsViewController.m */; };
 		35725DE70FFA4B9100E7DE5F /* bingo.wav in Resources */ = {isa = PBXBuildFile; fileRef = 35725DE60FFA4B9100E7DE5F /* bingo.wav */; };
@@ -45,6 +46,7 @@
 		3546915F0FFD59D8003423CF /* EventManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventManager.h; sourceTree = "<group>"; };
 		354691600FFD59D8003423CF /* EventManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventManager.m; sourceTree = "<group>"; };
 		354691AD0FFD5B62003423CF /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		35481BC8100F8F1A006EA24C /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		3549E35D0FE847EB00D69649 /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
 		35718D070FFBB37C00666D9B /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		35718D080FFBB37C00666D9B /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 		35884E710FE7254B00BAD10F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				35481BC8100F8F1A006EA24C /* background.png */,
 				358488A210028FCD000A3792 /* Default.png */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				3546913C0FFD58AB003423CF /* events.plist */,
@@ -210,6 +213,7 @@
 				352A6E070FFBE66D00D81DEB /* bingoBig.png in Resources */,
 				3546913D0FFD58AB003423CF /* events.plist in Resources */,
 				358488A310028FCD000A3792 /* Default.png in Resources */,
+				35481BC9100F8F1A006EA24C /* background.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

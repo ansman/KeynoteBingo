@@ -24,8 +24,6 @@
 	<string>0.9 Beta</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSMainNibFile</key>
-	<string></string>
 	<key>UIRequiresPersistentWiFi</key>
 	<true/>
 </dict>
