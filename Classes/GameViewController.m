@@ -67,12 +67,6 @@
 		else
 			boardNumberLabel.text = [NSString stringWithFormat:@"Board #%@", boardNumber];
 		
-		CGPoint point = CGPointMake([[NSUserDefaults standardUserDefaults] floatForKey:@"contentOffsetX"], [[NSUserDefaults standardUserDefaults] floatForKey:@"contentOffsetY"]);
-			
-		[gameBoardView setContentOffset:point animated:NO];
-			
-		gameBoardView.zoomScale = [[NSUserDefaults standardUserDefaults] floatForKey:@"zoomScale"];
-		
 		if([gameBoard bingo])
 			[self bingoSilent];
 		else
@@ -160,7 +154,16 @@
 	gameBoardView.delegate = self;
 	[gameBoardView addSubview:gameBoard.view];
 	[gameBoardView setContentSize:CGSizeMake(gameBoard.view.frame.size.width, gameBoard.view.frame.size.height)];
-	gameBoardView.zoomScale = 0.588;
+	
+	if([[NSUserDefaults standardUserDefaults] floatForKey:@"zoomScale"] != 0) {
+		CGPoint point = CGPointMake([[NSUserDefaults standardUserDefaults] floatForKey:@"contentOffsetX"], [[NSUserDefaults standardUserDefaults] floatForKey:@"contentOffsetY"]);
+		
+		[gameBoardView setContentOffset:point animated:NO];
+		
+		gameBoardView.zoomScale = [[NSUserDefaults standardUserDefaults] floatForKey:@"zoomScale"];
+	} else 
+		gameBoardView.zoomScale = 0.588;
+			
 	[self.view addSubview:gameBoardView];
 	
 	bingoLabel.textAlignment = UITextAlignmentCenter;

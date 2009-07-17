@@ -81,7 +81,7 @@ NSString *LAST_UPDATE_URL = @"http://keynote.se/iphone/events-update-time.txt";
  * Fetches events from the server.
  */
 - (void) updateToNewerEvents {
-	[delegate setLoadingText:@"Fetching newer events..."];
+	[delegate setLoadingText:@"Updating events..."];
 	status = EventManagerStatusUpdating;
 	[self makeConnection:EVENTS_URL];
 }
@@ -123,7 +123,7 @@ NSString *LAST_UPDATE_URL = @"http://keynote.se/iphone/events-update-time.txt";
 	}
 	else if(status == EventManagerStatusUpdating) { // Fetching events.
 		status = EventManagerStatusIdle;
-		[delegate setLoadingText:@"Processing fetched data..."];
+		[delegate setLoadingText:@"Processing data..."];
 		NSDictionary *processedData = [self processEventsData:data];
 		[data release];
 		data = nil;
@@ -275,7 +275,7 @@ NSString *LAST_UPDATE_URL = @"http://keynote.se/iphone/events-update-time.txt";
 	if(events)
 		return;
 	
-	[delegate setLoadingText:@"Loading events from file..."];
+	[delegate setLoadingText:@"Loading events..."];
 	
 	NSString *pathCached = [NSString stringWithFormat:@"%@/Library/Caches/events.plist", NSHomeDirectory()];
 	NSDictionary *rootDictCached = [NSDictionary dictionaryWithContentsOfFile:pathCached];
@@ -341,7 +341,7 @@ NSString *LAST_UPDATE_URL = @"http://keynote.se/iphone/events-update-time.txt";
 	NSString *filePath = [NSString stringWithFormat:@"%@/Library/Caches/events.plist", NSHomeDirectory()];
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
 		
-	[delegate setLoadingText:@"Writing events to file..."];
+	[delegate setLoadingText:@"Saving events..."];
 	
 	[dict setObject:events forKey:@"events"];
 	[dict setObject:[NSNumber numberWithInt:eventsID] forKey:@"eventsID"];

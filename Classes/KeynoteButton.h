@@ -8,18 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface KeynoteButton : UIControl {
-	BOOL useButtonOverlay;
-	
+@interface KeynoteButton : UIControl {	
 	@protected
 	UILabel *titleLabel;
-	UIImage *buttonOverlay;
 	NSMutableArray *titles;
 	NSMutableArray *titleColors;
 	NSMutableArray *images;
 }
 
-@property (nonatomic, getter=isUsingButtonOverlay) BOOL useButtonOverlay;
 @property (nonatomic, retain) UIImage *buttonOverlay;
 @property (nonatomic, readonly) UILabel *titleLabel;
 

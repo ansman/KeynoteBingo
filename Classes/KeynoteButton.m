@@ -10,7 +10,7 @@
 
 @implementation KeynoteButton
 
-@synthesize titleLabel, buttonOverlay, useButtonOverlay;
+@synthesize titleLabel;
 
 - (id)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
@@ -25,9 +25,6 @@
 		titles = [[NSMutableArray alloc] initWithObjects:@"", [NSNull null], [NSNull null], [NSNull null], nil];
 		images = [[NSMutableArray alloc] initWithObjects:[NSNull null], [NSNull null], [NSNull null], [NSNull null], nil];
 		titleColors = [[NSMutableArray alloc] initWithObjects:titleLabel.textColor, [NSNull null], [NSNull null], [NSNull null], nil];
-		
-		self.buttonOverlay = [UIImage imageNamed:@"buttonOverlay.png"];
-		useButtonOverlay = YES;
     }
 	
     return self;
@@ -35,7 +32,6 @@
 
 - (void)dealloc {
 	[titleLabel release];
-	[buttonOverlay release];
 	[titles release];
 	[titleColors release];
 	[images release];
@@ -301,8 +297,6 @@
 	titleLabel.text = whichTitle;
 	titleLabel.textColor = whichColor;
 	[titleLabel drawTextInRect:labelRect];
-	
-	[buttonOverlay drawInRect:rect];
 }
 
 @end

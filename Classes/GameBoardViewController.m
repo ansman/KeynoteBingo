@@ -31,14 +31,15 @@
 			int row = i / 5;
 			int col = i % 5;
 			
-			int x = row * 95 + 8 * row + 17;
-			int y = col * 95 + 8 * col + 17;
+			int x = row * 95 + 8 * row + 22;
+			int y = col * 95 + 8 * col + 22;
 			button = [[[KeynoteButton alloc] initWithFrame:CGRectMake(x, y, 95, 95)] autorelease];
 			button.tag = i+1;
 			
 			[button setButtonImage:buttonImageNormal forState:UIControlStateNormal];
 			[button setButtonImage:buttonImageSelected forState:UIControlStateSelected];
 			[button setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+			button.titleLabel.font = [UIFont boldSystemFontOfSize:15];
 			[button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
 			[array addObject:button];
 		}
