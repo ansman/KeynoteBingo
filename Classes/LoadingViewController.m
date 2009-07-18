@@ -56,8 +56,6 @@
 	cancelButton.frame = CGRectMake(220, 390, 90, 32);
 	[cancelButton addTarget:delegate action:@selector(cancelUpdate) forControlEvents:UIControlEventTouchUpInside];
 	[cancelButton setTitle:@"Cancel Update" forState:UIControlStateNormal];
-	
-	[self updateStarted];
 }
 
 - (void)updateStarted {

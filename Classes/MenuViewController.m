@@ -91,7 +91,7 @@
 }
 
 - (void) transitionDidStop {
-	if(self.view.superview)
+	if(self.view.superview && [numberInput canBecomeFirstResponder])
 		[numberInput becomeFirstResponder];
 }
 
