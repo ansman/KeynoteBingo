@@ -107,20 +107,14 @@
 	bingoImage.alpha = 2.5;
 	self.view.userInteractionEnabled = NO;
 	
-	CGRect rect = bingoImage.frame;
-	rect.size.width = 317;
-	rect.size.height = 229;
-	rect.origin.x = 3;
-	rect.origin.y = 156;
-	
 	[self.view addSubview:bingoImage];
 	[self.view bringSubviewToFront:bingoImage];
 	
 	[UIView beginAnimations:nil context:nil];
 	[UIView setAnimationCurve:UIViewAnimationCurveLinear];
-	[UIView setAnimationDuration:1];
+	[UIView setAnimationDuration:0.8];
 	[UIView setAnimationDelegate:self];
-	bingoImage.frame = rect;
+	bingoImage.frame = CGRectMake(3, 156, 317, 229);
 	bingoImage.alpha = 0;
 	[UIView commitAnimations];
 	

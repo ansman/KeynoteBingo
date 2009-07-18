@@ -199,7 +199,7 @@ NSString *LAST_UPDATE_URL = @"http://keynote.se/iphone/events-update-time.txt";
 	
 	if(![manager fileExistsAtPath:path]) { // First time starting the app.
 		UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Automatic Updates"
-														message:@"This application uses an automatic update feature which requires an internet connect to function.\nDo you wish to enable this feature (this can be changed later in the settings menu later)?" 
+														message:@"This application uses an automatic update feature which requires an internet connect to function.\nDo you wish to enable this feature (this can be changed later in the settings menu)?" 
 														delegate:self 
 														cancelButtonTitle:@"No"
 														otherButtonTitles:nil] autorelease];

@@ -54,7 +54,7 @@ int SETTINGS_VIEW = 2;
 	gameBoardViewController.delegate = self;
 	gameBoardViewController.eventManager = eventManager;
 
-	[eventManager loadEvents];
+	//[eventManager loadEvents];
 }
 
 - (void) performTransition:(UIView *)oldView newView:(UIView *)newView transitionType:(TransitionType)transitionType {
