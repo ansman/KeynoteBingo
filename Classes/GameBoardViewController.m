@@ -59,13 +59,6 @@
 		bingo = NO;
 }
 
-- (UIButton *) getButton: (NSUInteger) index {
-	if (index >= [self.view.subviews count])
-		return nil;
-	
-	return [self.view.subviews objectAtIndex:index];
-}
-
 - (void) buttonClicked: (KeynoteButton *) button {
 	BOOL hasBingo = [self checkBingo];
 	if(hasBingo && !bingo) {
